@@ -1,6 +1,5 @@
 "use client"
 import Script from "next/script"
-import config from "@/lib/config"
 export default function GoogleLoader() {
   function handleGoogleScriptLoad() {
     console.log("Google accounts script loaded successfully.")
