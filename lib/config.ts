@@ -18,6 +18,7 @@ const requireEnv = (env: string) => {
 
 const config = {
   GOOGLE_CLIENT_ID: requireEnv("GOOGLE_CLIENT_ID"),
+  GOOGLE_CLIENT_SECRET: requireEnv("GOOGLE_CLIENT_SECRET"),
   NODE_ENV: getEnv("NODE_ENV", "development"),
 }
 
