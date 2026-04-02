@@ -16,6 +16,8 @@ export default function GoogleLoader() {
 
         }
     });
+
+    console.log("Google accounts script loaded successfully.")
   }
 
   function handleGoogleScriptError() {
