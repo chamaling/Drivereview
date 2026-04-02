@@ -1,7 +1,8 @@
 "use client"
 import Script from "next/script"
 import { clientConfig } from '@/lib/config/client';
-export default function GoogleLoader() {
+import { Button } from "@/components/ui/button";
+export default function GoogleDriveButton() {
   function handleGoogleScriptLoad() {
         google.accounts.oauth2.initCodeClient({
         client_id: clientConfig.GOOGLE_CLIENT_ID,
@@ -24,12 +25,13 @@ export default function GoogleLoader() {
     console.error("Failed to load the Google accounts script.")
   }
 
-  return (
+  return <>
     <Script
       src="https://accounts.google.com/gsi/client"
       strategy="afterInteractive"
       onLoad={handleGoogleScriptLoad}
       onError={handleGoogleScriptError}
     />
-  )
+    <Button>Connect to Google Drive</Button>
+  </>
 }
