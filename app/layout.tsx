@@ -3,6 +3,7 @@ import { Geist_Mono, Inter } from "next/font/google"
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
+import { Metadata } from "next"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -11,6 +12,11 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
+export const metadata: Metadata = {
+  title: "Drivereview",
+  description: "Claim your Google Drive storage back with an automated review assistant.",
+  authors: [{ name: "Lamin Bangura" }],
+}
 export default function RootLayout({
   children,
 }: Readonly<{
