@@ -8,13 +8,13 @@ export default function Page() {
         <h1 className="text-4xl md:text-5xl font-semibold ">Claim your Google Drive storage back</h1>
         <p className="text-center text-muted-foreground mb-8">Drivereview analyzes your Google Drive usage and gives best recommendations for optimizing your storage.</p>
         <GoogleDriveButton />
-      <div className="mt-16 text-lg text-muted-foreground flex flex-row items-center gap-x-4">
-        <p className="mr-2">Connect to Drive</p>
+      <ol className="mt-16 text-lg text-muted-foreground flex flex-row items-center gap-x-4">
+        <li className="mr-2">Connect to Drive</li>
         <HeroArrowConnectorIcon />
-        <p>We scan storage usage</p> 
+        <li>We scan storage usage</li> 
         <HeroArrowConnectorIcon />
-        <p>Get cleanup recommendations</p>
-      </div>
+        <li>Get cleanup recommendations</li>
+      </ol>
       </main>
       <footer className="mt-auto text-sm text-secondary-foreground">
         <p>
