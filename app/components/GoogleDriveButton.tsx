@@ -2,6 +2,8 @@
 import Script from "next/script"
 import { clientConfig } from '@/lib/config/client';
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
+
 export default function GoogleDriveButton() {
   function handleGoogleScriptLoad() {
         google.accounts.oauth2.initCodeClient({
@@ -32,6 +34,8 @@ export default function GoogleDriveButton() {
       onLoad={handleGoogleScriptLoad}
       onError={handleGoogleScriptError}
     />
-    <Button>Connect to Google Drive</Button>
+    <Button className="py-5">
+      <Image src="/google-drive-icon.png" alt="Google Drive Icon" width={1280/60} height={1144/60} className="mr-2" />
+      Connect to Google Drive</Button>
   </>
 }
