@@ -1,4 +1,5 @@
 import GoogleDriveButton from "./components/GoogleDriveButton"
+import HeroArrowConnectorIcon from "./components/HeroArrowConnectorIcon"
 export default function Page() {
   return (
     <div className="flex flex-col h-screen items-center justify-center">
@@ -7,8 +8,15 @@ export default function Page() {
         <h1 className="text-4xl md:text-5xl font-semibold ">Claim your Google Drive storage back</h1>
         <p className="text-center text-muted-foreground mb-8">Drivereview analyzes your Google Drive usage and gives best recommendations for optimizing your storage.</p>
         <GoogleDriveButton />
+      <div className="mt-16 text-lg text-muted-foreground flex flex-row items-center gap-x-4">
+        <p className="mr-2">Connect to Drive</p>
+        <HeroArrowConnectorIcon />
+        <p>We scan storage usage</p> 
+        <HeroArrowConnectorIcon />
+        <p>Get cleanup recommendations</p>
+      </div>
       </main>
-      <footer className="mt-auto text-sm text-muted-foreground">
+      <footer className="mt-auto text-sm text-secondary-foreground">
         <p>
           &copy; {new Date().getFullYear()} Lamin Bangura. All rights reserved.
         </p>
