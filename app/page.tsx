@@ -1,6 +1,8 @@
 import GoogleDriveButton from "./components/GoogleDriveButton"
 import HeroArrowConnectorIcon from "./components/HeroArrowConnectorIcon"
 import HeroImage from "./components/HeroImage"
+import { Separator } from "@/components/ui/separator"
+
 export default function Page() {
   return (
     <div className="flex flex-col h-screen items-center justify-center">
@@ -34,6 +36,7 @@ export default function Page() {
       <div className="mt-4 flex flex-row items-center gap-x-4">
       </div>
       </main>
+      <Separator className="max-w-1/2"/>
       <footer className="mt-auto text-sm text-secondary-foreground">
         <p>
           &copy; {new Date().getFullYear()} Lamin Bangura. All rights reserved.
