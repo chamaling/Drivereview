@@ -1,5 +1,7 @@
 import GoogleDriveButton from "./components/GoogleDriveButton"
 import HeroArrowConnectorIcon from "./components/HeroArrowConnectorIcon"
+import Image from "next/image"
+
 export default function Page() {
   return (
     <div className="flex flex-col h-screen items-center justify-center">
@@ -15,6 +17,26 @@ export default function Page() {
         <HeroArrowConnectorIcon />
         <li>Get cleanup recommendations</li>
       </ol>
+      <div className="mt-4 flex flex-row items-center gap-x-4">
+      <Image
+      src="/placeholder.svg"
+      alt="Picture of google drive with untitled document and important document"
+      width={150}
+      height={50}
+      />
+      <Image
+      src="/placeholder.svg"
+      alt="Picture of web app scanning google drive storage"
+      width={150}
+      height={50}
+      />
+      <Image
+      src="/placeholder.svg"
+      alt="Picture of web app showing recommendations for optimizing google drive storage"
+      width={150}
+      height={50}
+      />
+      </div>
       </main>
       <footer className="mt-auto text-sm text-secondary-foreground">
         <p>
