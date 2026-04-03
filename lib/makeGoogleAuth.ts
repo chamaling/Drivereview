@@ -4,7 +4,8 @@ import serverConfig from "@/lib/config/server"
 export default function makeGoogleAuth(tokens?: Credentials) {
   const oauth2Client = new OAuth2Client(
     serverConfig.GOOGLE_CLIENT_ID,
-    serverConfig.GOOGLE_CLIENT_SECRET
+    serverConfig.GOOGLE_CLIENT_SECRET,
+    serverConfig.REDIRECT_URI
   )
   if (tokens) {
     oauth2Client.setCredentials(tokens)

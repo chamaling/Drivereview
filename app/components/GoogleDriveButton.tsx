@@ -21,7 +21,6 @@ export default function GoogleDriveButton() {
           setError("Failed to connect to Google Drive. Please try again.")
           return
         }
-
         try {
           await executeAsync({ code: response.code })
         } catch (error) {

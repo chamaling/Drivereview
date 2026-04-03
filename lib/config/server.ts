@@ -23,6 +23,10 @@ export const serverConfig = {
   GOOGLE_CLIENT_SECRET: requireEnv("GOOGLE_CLIENT_SECRET"),
   GOOGLE_CLIENT_ID: requireEnv("NEXT_PUBLIC_GOOGLE_CLIENT_ID"),
   NODE_ENV: getEnv("NODE_ENV", "development"),
+  REDIRECT_URI: getEnv(
+    "NEXT_PUBLIC_GOOGLE_REDIRECT_URI",
+    "http://localhost:3000"
+  ),
 }
 
 export default serverConfig
