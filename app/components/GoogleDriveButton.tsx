@@ -14,6 +14,7 @@ export default function GoogleDriveButton() {
   const [error, setError] = useState<string | null>(null)
   const { executeAsync } = useAction(authenticateUserAction)
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
 
   function handleGoogleScriptLoad() {
     codeClient.current = google.accounts.oauth2.initCodeClient({
@@ -26,6 +27,7 @@ export default function GoogleDriveButton() {
           return
         }
         try {
+          setIsLoading(true)
           await executeAsync({ code: response.code })
           router.replace("/dashboard")
         } catch (error) {
@@ -36,6 +38,8 @@ export default function GoogleDriveButton() {
           } else {
             setError("An unexpected error occurred. Please try again.")
           }
+        } finally {
+          setIsLoading(false)
         }
       },
     })
@@ -60,7 +64,7 @@ export default function GoogleDriveButton() {
         onLoad={handleGoogleScriptLoad}
         onError={handleGoogleScriptError}
       />
-      <Button className="py-5" onClick={handleButtonClick}>
+      <Button className="py-5" onClick={handleButtonClick} disabled={isLoading}>
         <Image
           src="/google-drive-icon.png"
           alt="Google Drive Icon"
