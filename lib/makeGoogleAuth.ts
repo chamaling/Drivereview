@@ -1,3 +1,5 @@
+import "server-only"
+
 import { OAuth2Client, type Credentials } from "google-auth-library"
 import serverConfig from "@/lib/config/server"
 
