@@ -3,9 +3,8 @@ import { actionClient } from "@/lib/actionClient"
 import { z } from "zod"
 import { cookies } from "next/headers"
 import serverConfig from "@/lib/config/server"
-import { OAuth2Client } from "google-auth-library"
 import { addSession, createSessionID } from "@/lib/sessionManager"
-
+import makeGoogleAuth from "@/lib/makeGoogleAuth"
 export const authenticateUserAction = actionClient
   .inputSchema(
     z.object({
@@ -15,11 +14,7 @@ export const authenticateUserAction = actionClient
   .action(async ({ parsedInput }) => {
     const { code } = parsedInput
     try {
-      const oauth2Client = new OAuth2Client(
-        serverConfig.GOOGLE_CLIENT_ID,
-        serverConfig.GOOGLE_CLIENT_SECRET
-      )
-
+      const oauth2Client = makeGoogleAuth()
       const { tokens } = await oauth2Client.getToken(code)
       const cookieStore = await cookies()
       const sessionId = createSessionID()
@@ -30,6 +25,7 @@ export const authenticateUserAction = actionClient
         sameSite: "lax",
         maxAge: 60 * 60, // 1 hour
       })
+
       oauth2Client.setCredentials(tokens)
       addSession(sessionId, tokens)
     } catch {
