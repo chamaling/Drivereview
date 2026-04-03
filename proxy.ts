@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
 import { type SessionID } from "@/lib/sessionManager"
-import path from "node:path"
 
 const publicRoutes = ["/"]
 
