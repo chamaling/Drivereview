@@ -5,30 +5,40 @@ import { cookies } from "next/headers"
 import serverConfig from "@/lib/config/server"
 import { addSession, createSessionID } from "@/lib/sessionManager"
 import makeGoogleAuth from "@/lib/makeGoogleAuth"
+import ActionError from "@/classes/ActionError"
 export const authenticateUserAction = actionClient
   .inputSchema(
     z.object({
       code: z.string(),
     })
   )
-  .action(async ({ parsedInput }) => {
-    const { code } = parsedInput
-    try {
-      const oauth2Client = makeGoogleAuth()
-      const { tokens } = await oauth2Client.getToken(code)
-      const cookieStore = await cookies()
-      const sessionId = createSessionID()
+  .action(
+    async ({ parsedInput }) => {
+      const { code } = parsedInput
+      try {
+        console.log("authenticating user with code:", code)
+        const oauth2Client = makeGoogleAuth()
+        const { tokens } = await oauth2Client.getToken(code)
+        const cookieStore = await cookies()
+        const sessionId = createSessionID()
 
-      cookieStore.set("session", sessionId, {
-        httpOnly: true,
-        secure: serverConfig.NODE_ENV === "production",
-        sameSite: "lax",
-        maxAge: 60 * 60, // 1 hour
-      })
+        cookieStore.set("session", sessionId, {
+          httpOnly: true,
+          secure: serverConfig.NODE_ENV === "production",
+          sameSite: "lax",
+          maxAge: 60 * 60, // 1 hour
+        })
 
-      oauth2Client.setCredentials(tokens)
-      addSession(sessionId, tokens)
-    } catch {
-      throw new Error("Authentication failed. Please try again.")
+        oauth2Client.setCredentials(tokens)
+        addSession(sessionId, tokens)
+        console.log("adding session....", sessionId)
+      } catch (error) {
+        console.log("Error authenticating user:", error)
+
+        throw new ActionError("Authentication failed. Please try again.")
+      }
+    },
+    {
+      throwServerError: true,
     }
-  })
+  )
