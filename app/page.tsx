@@ -11,7 +11,7 @@ export default function Page() {
         <h1 className= "w-full max-w-4xl px-4 text-2xl sm:text-4xl font-semibold text-center">Claim your Google Drive storage back</h1>
         <p className="text-center text-muted-foreground mb-8">Drivereview analyzes your Google Drive usage and gives best recommendations for optimizing your storage.</p>
         <GoogleDriveButton />
-      <ol className=" mt-8 md:mt-16 text-lg text-muted-foreground grid grid-cols-1 md:grid-cols-[repeat(3,minmax(150px,1fr))] items-center gap-x-16 gap-y-8 *:flex *:items-center *:relative *:flex-col *:gap-y-4 *:text-center">
+      <ol className=" mt-8 md:mt-16 text-lg text-muted-foreground grid grid-cols-1 md:grid-cols-[repeat(3,minmax(150px,1fr))] items-end gap-x-16 gap-y-8 *:flex *:items-center *:relative *:flex-col *:gap-y-4 *:text-center *:text-sm *:md:text-lg">
         <li className="mr-2">Connect to Drive <HeroArrowConnectorIcon />
       <HeroImage
       src="/placeholder.svg"
