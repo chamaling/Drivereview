@@ -29,7 +29,6 @@ export default function GoogleDriveButton() {
         try {
           setIsLoading(true)
           await executeAsync({ code: response.code })
-          router.replace("/dashboard")
         } catch (error) {
           if (error instanceof Error) {
             setError(

@@ -6,6 +6,8 @@ import serverConfig from "@/lib/config/server"
 import { addSession, createSessionID } from "@/lib/sessionManager"
 import makeGoogleAuth from "@/lib/makeGoogleAuth"
 import ActionError from "@/classes/ActionError"
+import { revalidatePath } from "next/cache"
+import { redirect } from "next/navigation"
 export const authenticateUserAction = actionClient
   .inputSchema(
     z.object({
@@ -30,9 +32,12 @@ export const authenticateUserAction = actionClient
 
         oauth2Client.setCredentials(tokens)
         addSession(sessionId, tokens)
-      } catch (error) {
+      } catch {
         throw new ActionError("Authentication failed. Please try again.")
       }
+
+      revalidatePath("/dashboard")
+      redirect("/dashboard")
     },
     {
       throwServerError: true,
