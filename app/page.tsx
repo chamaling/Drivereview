@@ -37,7 +37,7 @@ export default function Page() {
       </div>
       </main>
       <Separator className="max-w-1/2"/>
-      <footer className="mt-auto text-sm text-secondary-foreground">
+      <footer className="mt-auto text-sm text-secondary-foreground mb-12 md:mb-2">
         <p>
           &copy; {new Date().getFullYear()} Lamin Bangura. All rights reserved.
         </p>
