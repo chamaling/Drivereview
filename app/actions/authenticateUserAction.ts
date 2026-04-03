@@ -16,7 +16,6 @@ export const authenticateUserAction = actionClient
     async ({ parsedInput }) => {
       const { code } = parsedInput
       try {
-        console.log("authenticating user with code:", code)
         const oauth2Client = makeGoogleAuth()
         const { tokens } = await oauth2Client.getToken(code)
         const cookieStore = await cookies()
@@ -31,10 +30,7 @@ export const authenticateUserAction = actionClient
 
         oauth2Client.setCredentials(tokens)
         addSession(sessionId, tokens)
-        console.log("adding session....", sessionId)
       } catch (error) {
-        console.log("Error authenticating user:", error)
-
         throw new ActionError("Authentication failed. Please try again.")
       }
     },

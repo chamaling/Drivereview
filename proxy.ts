@@ -6,7 +6,6 @@ const publicRoutes = ["/"]
 
 export default function proxy(request: NextRequest) {
   const sessionId = request.cookies.get("session")?.value as SessionID
-
   const { pathname } = request.nextUrl
 
   if (!publicRoutes.includes(pathname)) {
