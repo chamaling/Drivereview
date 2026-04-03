@@ -1,3 +1,4 @@
+"use server"
 import { actionClient } from '@/lib/actionClient';
 import { z } from 'zod';
 

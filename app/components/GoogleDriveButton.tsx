@@ -5,9 +5,12 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRef } from "react";
 import { useState } from "react";
+import { useAction } from "next-safe-action/hooks";
+import { authenticateUserAction } from "@/app/actions/authenticateUserAction";
 export default function GoogleDriveButton() {
-  const codeClient = useRef<google.accounts.oauth2.CodeClient | null>(null);
+const codeClient = useRef<google.accounts.oauth2.CodeClient | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { executeAsync } = useAction(authenticateUserAction);
   function handleGoogleScriptLoad() {
         codeClient.current = google.accounts.oauth2.initCodeClient({
         client_id: clientConfig.GOOGLE_CLIENT_ID,
@@ -22,6 +25,11 @@ export default function GoogleDriveButton() {
         }
 
           console.log("Authorization code received:", response.code);
+          try {
+            executeAsync({code: response.code});
+          } catch  {
+            setError("An error occurred while processing your request. Please try again.");
+          }
         }
     });
 
