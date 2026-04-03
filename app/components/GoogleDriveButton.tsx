@@ -24,7 +24,6 @@ const codeClient = useRef<google.accounts.oauth2.CodeClient | null>(null);
             return;
         }
 
-          console.log("Authorization code received:", response.code);
           try {
             executeAsync({code: response.code});
           } catch  {
@@ -33,7 +32,6 @@ const codeClient = useRef<google.accounts.oauth2.CodeClient | null>(null);
         }
     });
 
-    console.log("Google accounts script loaded successfully.")
   }
 
   function handleGoogleScriptError() {
