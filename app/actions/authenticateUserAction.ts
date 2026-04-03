@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { cookies } from 'next/headers';
 import serverConfig from '@/lib/config/server';
 import { OAuth2Client } from 'google-auth-library';
+import { addSession,  createSessionID } from '@/lib/sessionManager';
 
 const oauth2Client = new OAuth2Client(
     serverConfig.GOOGLE_CLIENT_ID,
@@ -19,7 +20,8 @@ export const authenticateUserAction = actionClient.inputSchema(
     try {
     const {tokens} = await oauth2Client.getToken(code);
     const cookieStore = await cookies();
-    const sessionId = crypto.randomUUID();
+    const sessionId = createSessionID();
+
     cookieStore.set("session", sessionId , {
         httpOnly: true,
         secure: serverConfig.NODE_ENV === "production",
