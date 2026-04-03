@@ -4,11 +4,12 @@
 * a personal project and not designed for scale. It would instead be best practice to use
 * a more robust solution like Redis in production.
 */
+import { type Credentials } from "google-auth-library";
 export type SessionID = string & {__brand: "SessionID"}
 
 
 type Session = {
-    accessToken: string;
+    tokens: Credentials;
     expiresAt: number;
 }
 
@@ -20,11 +21,11 @@ export function createSessionID(): SessionID {
     return crypto.randomUUID() as SessionID;
 }
 
-export function addSession(newSessionId: SessionID, accessToken: string): void {
+export function addSession(newSessionId: SessionID, tokens: Credentials): void {
         const expiresAt = Date.now() + 60 * 60 * 1000; // 1 hour
 
         sessions.set(newSessionId, {
-            accessToken,
+            tokens, 
             expiresAt
         });
 }
