@@ -13,6 +13,7 @@ export const authClient = actionClient.use(async ({ next }) => {
 
   const session = getSession(sessionId)
   if (!session) {
+    cookieStore.delete("session")
     redirect("/")
   }
 
