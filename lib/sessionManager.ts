@@ -16,6 +16,10 @@ type SessionStore = Map<SessionID, Session>;
 
 const sessions: SessionStore = new Map();
 
+export function createSessionID(): SessionID {
+    return crypto.randomUUID() as SessionID;
+}
+
 export function addSession(newSessionId: SessionID, accessToken: string): void {
         const expiresAt = Date.now() + 60 * 60 * 1000; // 1 hour
 
