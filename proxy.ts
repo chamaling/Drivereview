@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getSession } from "@/lib/sessionManager"
 import { type SessionID } from "@/lib/sessionManager"
 
 const publicRoutes = ["/"]
@@ -9,7 +8,7 @@ export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   if (!publicRoutes.includes(pathname)) {
-    if (!sessionId || !getSession(sessionId)) {
+    if (!sessionId) {
       return NextResponse.redirect(new URL("/", request.url))
     }
   }
