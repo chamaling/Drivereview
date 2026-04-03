@@ -16,7 +16,6 @@ export const authenticateUserAction = actionClient.inputSchema(
     })
 ).action(async ({parsedInput}) => {
     const {code} = parsedInput;
-    console.log("Received authorization code in server action:", code);
     try {
     const {tokens} = await oauth2Client.getToken(code);
     const cookieStore = await cookies();
@@ -27,8 +26,7 @@ export const authenticateUserAction = actionClient.inputSchema(
         sameSite: "lax",
         maxAge: 60 * 60 // 1 hour
     });
-} catch (error) {
-    console.error("Error exchanging code for tokens:", error);
+} catch {
     throw new Error("Authentication failed. Please try again.");
 }
 })

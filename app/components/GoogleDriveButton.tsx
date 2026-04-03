@@ -17,17 +17,19 @@ const codeClient = useRef<google.accounts.oauth2.CodeClient | null>(null);
         scope: "https://www.googleapis.com/auth/drive.metadata.readonly",
         ux_mode: "popup",
         callback: (response) => {
-        /* TODO: Handle the authorization response */
         if (response.error) {
-            console.error("Error during Google OAuth:", response.error);
             setError("Failed to connect to Google Drive. Please try again.");
             return;
         }
 
           try {
             executeAsync({code: response.code});
-          } catch  {
-            setError("An error occurred while processing your request. Please try again.");
+          } catch (error) {
+            if (error instanceof Error) {
+              setError(error.message || "An unexpected error occurred. Please try again.");
+             } else {
+              setError("An unexpected error occurred. Please try again.");
+             }
           }
         }
     });
