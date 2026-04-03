@@ -7,13 +7,11 @@ import { useRef } from "react"
 import { useState } from "react"
 import { useAction } from "next-safe-action/hooks"
 import { authenticateUserAction } from "@/app/actions/authenticateUserAction"
-import { useRouter } from "next/navigation"
 
 export default function GoogleDriveButton() {
   const codeClient = useRef<google.accounts.oauth2.CodeClient | null>(null)
   const [error, setError] = useState<string | null>(null)
   const { executeAsync } = useAction(authenticateUserAction)
-  const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 
   function handleGoogleScriptLoad() {
