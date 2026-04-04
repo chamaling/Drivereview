@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Field, FieldGroup } from "@/components/ui/field"
+import { Field, FieldGroup, FieldLegend, FieldSet } from "@/components/ui/field"
 import { Label } from "@/components/ui/label"
 import { MinimumFileSlider } from "./MinimumFileSlider"
 import { useState } from "react"
@@ -32,9 +32,9 @@ export default function ScanButton() {
             <Label htmlFor="file-size-1">Minimum File Size</Label>
             <MinimumFileSlider />
           </Field>
-          <Field>
-            <Label htmlFor="file-type-1">File Type</Label>
-          </Field>
+          <FieldSet>
+            <FieldLegend variant="label">File Type</FieldLegend>
+          </FieldSet>
           <Field>
             <Label htmlFor="last-modified-1">Last Modified</Label>
           </Field>
