@@ -14,6 +14,8 @@ import { Field, FieldGroup, FieldLegend, FieldSet } from "@/components/ui/field"
 import { Label } from "@/components/ui/label"
 import { MinimumFileSlider } from "./MinimumFileSlider"
 import { useState } from "react"
+import FileTypeButton from "./FileTypeButton"
+
 export default function ScanButton() {
   const [open, setOpen] = useState(true)
 
@@ -34,6 +36,9 @@ export default function ScanButton() {
           </Field>
           <FieldSet>
             <FieldLegend variant="label">File Type</FieldLegend>
+            <FileTypeButton fileType="Image" />
+            <FileTypeButton fileType="Document" />
+            <FileTypeButton fileType="Video" />
           </FieldSet>
           <Field>
             <Label htmlFor="last-modified-1">Last Modified</Label>
