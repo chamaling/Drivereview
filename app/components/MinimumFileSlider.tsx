@@ -5,9 +5,19 @@ import * as React from "react"
 import { Slider } from "@/components/ui/slider"
 
 function snapFileSize(bytes: number): number {
+  if (bytes >= 1e10) {
+    // snap to nearest 5 GB
+    return Math.round(bytes / 5e9) * 5e9
+  }
+
   if (bytes >= 1e9) {
     // snap to nearest 0.1 GB
     return Math.round(bytes / 1e8) * 1e8
+  }
+
+  if (bytes >= 1e7) {
+    // snap to nearest 10 MB
+    return Math.round(bytes / 1e7) * 1e7
   }
 
   // snap to nearest 1 MB
