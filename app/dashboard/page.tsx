@@ -11,16 +11,18 @@ import { Button } from "@/components/ui/button"
 
 export default function Page() {
   return (
-    <Empty>
+    <Empty className="min-h-screen">
       <EmptyHeader>
-        <EmptyMedia variant="icon">
-          <EmptyIcon />
+        <EmptyMedia variant="icon" className="size-12 bg-transparent">
+          <EmptyIcon className="size-full!" weight="fill" />
         </EmptyMedia>
-        <EmptyTitle>No data</EmptyTitle>
-        <EmptyDescription>No data found</EmptyDescription>
+        <EmptyTitle className="text-lg">No drive data</EmptyTitle>
+        <EmptyDescription className="text-xs">
+          Click the button below to scan your drive!
+        </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button>Add data</Button>
+        <Button size="lg">Scan drive</Button>
       </EmptyContent>
     </Empty>
   )
