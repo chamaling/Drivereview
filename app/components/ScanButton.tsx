@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog"
 import { Field, FieldGroup } from "@/components/ui/field"
 import { Label } from "@/components/ui/label"
-
+import { MinimumFileSlider } from "./MinimumFileSlider"
 import { useState } from "react"
 export default function ScanButton() {
   const [open, setOpen] = useState(true)
@@ -30,6 +30,7 @@ export default function ScanButton() {
         <FieldGroup>
           <Field>
             <Label htmlFor="file-size-1">Minimum File Size</Label>
+            <MinimumFileSlider />
           </Field>
           <Field>
             <Label htmlFor="file-type-1">File Type</Label>
