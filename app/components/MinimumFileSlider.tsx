@@ -4,22 +4,47 @@ import * as React from "react"
 
 import { Slider } from "@/components/ui/slider"
 
-export function MinimumFileSlider() {
-  const [value, setValue] = React.useState(0.5)
+/*Users may have files that range from MB to GB, so we need a clean logarithmic mapping
+ * so the user feels they have good control
+ */
+function sliderValueToFileSize(sliderValue: number): number {
+  const minFileSize = 1e6 // 1 MB
+  const maxFileSize = 1e11 // 100 GB
 
+  const logMin = Math.log10(minFileSize)
+  const logMax = Math.log10(maxFileSize)
+
+  const logValue = logMin + (logMax - logMin) * (sliderValue / 100)
+  return Math.round(Math.pow(10, logValue))
+}
+function formatFileSize(fileSizeInBytes: number): string {
+  if (fileSizeInBytes >= 1e9) {
+    return (fileSizeInBytes / 1e9).toFixed(2) + " GB"
+  } else {
+    return (fileSizeInBytes / 1e6).toFixed(2) + " MB"
+  }
+}
+export function MinimumFileSlider() {
+  const [value, setValue] = React.useState(0)
+
+  function handleChange(newValue: number) {
+    console.log(newValue)
+    setValue(sliderValueToFileSize(newValue))
+  }
   return (
     <div className="mx-auto grid w-full max-w-xs gap-3">
       <div>
-        <span className="text-sm text-muted-foreground">{value} GB</span>
+        <span className="text-sm text-muted-foreground">
+          {formatFileSize(value)}
+        </span>
       </div>
 
       <Slider
         id="slider-demo-temperature"
-        value={value}
-        onValueChange={(value) => setValue(value as number)}
+        step={0.1}
         min={0}
         max={100}
-        step={0.1}
+        onValueChange={(newValue) => handleChange(newValue as number)}
       />
     </div>
   )
