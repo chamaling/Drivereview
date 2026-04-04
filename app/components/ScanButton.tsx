@@ -19,25 +19,28 @@ export default function ScanButton() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Button variant="outline">Open Dialog</Button>} />
+      <DialogTrigger render={<Button>Scan drive</Button>} />
       <DialogContent className="sm:max-w-sm">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>Filter your Drive</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
+            Select the criteria for which files you want to scan.
           </DialogDescription>
         </DialogHeader>
         <FieldGroup>
           <Field>
-            <Label htmlFor="name-1">Name</Label>
+            <Label htmlFor="file-size-1">Minimum File Size</Label>
           </Field>
           <Field>
-            <Label htmlFor="username-1">Username</Label>
+            <Label htmlFor="file-type-1">File Type</Label>
+          </Field>
+          <Field>
+            <Label htmlFor="last-modified-1">Last Modified</Label>
           </Field>
         </FieldGroup>
         <DialogFooter>
           <DialogClose render={<Button variant="outline">Cancel</Button>} />
-          <Button type="submit">Save changes</Button>
+          <Button type="submit">Scan</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
