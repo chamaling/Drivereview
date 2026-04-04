@@ -25,12 +25,13 @@ function formatFileSize(fileSizeInBytes: number): string {
   }
 }
 export function MinimumFileSlider() {
-  const [value, setValue] = React.useState(0)
+  const [value, setValue] = React.useState(sliderValueToFileSize(0))
 
   function handleChange(newValue: number) {
     console.log(newValue)
     setValue(sliderValueToFileSize(newValue))
   }
+
   return (
     <div className="mx-auto grid w-full max-w-xs gap-3">
       <div>
