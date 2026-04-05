@@ -11,7 +11,24 @@ import { authenticateUserAction } from "@/app/actions/authenticateUserAction"
 export default function GoogleDriveButton() {
   const codeClient = useRef<google.accounts.oauth2.CodeClient | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const { executeAsync } = useAction(authenticateUserAction)
+  const { execute } = useAction(authenticateUserAction, {
+    onExecute: () => {
+      setError(null)
+      setIsLoading(true)
+    },
+    onError: (error) => {
+      if (error instanceof Error) {
+        setError(
+          error.message || "An unexpected error occurred. Please try again."
+        )
+      } else {
+        setError("An unexpected error occurred. Please try again.")
+      }
+    },
+    onSettled: () => {
+      setIsLoading(false)
+    },
+  })
   const [isLoading, setIsLoading] = useState(false)
 
   function handleGoogleScriptLoad() {
@@ -24,20 +41,7 @@ export default function GoogleDriveButton() {
           setError("Failed to connect to Google Drive. Please try again.")
           return
         }
-        try {
-          setIsLoading(true)
-          await executeAsync({ code: response.code })
-        } catch (error) {
-          if (error instanceof Error) {
-            setError(
-              error.message || "An unexpected error occurred. Please try again."
-            )
-          } else {
-            setError("An unexpected error occurred. Please try again.")
-          }
-        } finally {
-          setIsLoading(false)
-        }
+        execute({ code: response.code })
       },
     })
   }
