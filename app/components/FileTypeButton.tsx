@@ -20,12 +20,9 @@ export default function FileTypeButton({
           className="flex size-24 flex-col items-center justify-center data-checked:bg-blue-500"
           variant="outline"
         >
-          <Image
-            src={src}
-            alt={"Google Drive Icon for " + fileType}
-            width={24}
-            height={24}
-          />
+          <div className="relative size-8">
+            <Image src={src} alt={"Google Drive Icon for " + fileType} fill />
+          </div>
           <span className="text-xs">{fileType}</span>
         </Button>
       )}
