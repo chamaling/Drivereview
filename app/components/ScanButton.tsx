@@ -25,9 +25,9 @@ import {
 } from "@/components/ui/select"
 
 const fileTypes = [
-  { fileType: "Google Docs", src: "/google-docs.svg" },
-  { fileType: "Google Sheets", src: "/google-sheets.svg" },
-  { fileType: "Google Slides", src: "/google-slides.svg" },
+  { fileType: "Docs", src: "/google-docs.svg" },
+  { fileType: "Sheets", src: "/google-sheets.svg" },
+  { fileType: "Slides", src: "/google-slides.svg" },
   { fileType: "Image", src: "/google-image.svg" },
   { fileType: "Video", src: "/google-video.svg" },
   { fileType: "PDF", src: "/google-pdf.svg" },
@@ -52,7 +52,7 @@ export default function ScanButton() {
           </Field>
           <FieldSet className="flex items-center justify-center">
             <FieldLegend variant="label">File Type</FieldLegend>
-            <div className="grid w-3/4 grid-cols-2 justify-items-center gap-x-16 gap-y-4 min-[480px]:grid-cols-3">
+            <div className="grid w-3/4 grid-cols-3 justify-items-center gap-x-16 gap-y-4">
               {fileTypes.map(({ fileType, src }) => (
                 <FileTypeButton key={fileType} fileType={fileType} src={src} />
               ))}
