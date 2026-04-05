@@ -17,12 +17,12 @@ import { useState } from "react"
 import FileTypeButton from "./FileTypeButton"
 
 const fileTypes = [
-  { fileType: "Image", src: "/google-image.svg" },
-  { fileType: "Video", src: "/google-video.svg" },
-  { fileType: "PDF", src: "/google-pdf.svg" },
   { fileType: "Google Docs", src: "/google-docs.svg" },
   { fileType: "Google Sheets", src: "/google-sheets.svg" },
   { fileType: "Google Slides", src: "/google-slides.svg" },
+  { fileType: "Image", src: "/google-image.svg" },
+  { fileType: "Video", src: "/google-video.svg" },
+  { fileType: "PDF", src: "/google-pdf.svg" },
 ]
 export default function ScanButton() {
   const [open, setOpen] = useState(true)
