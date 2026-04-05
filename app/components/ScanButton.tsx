@@ -15,6 +15,14 @@ import { Label } from "@/components/ui/label"
 import { MinimumFileSlider } from "./MinimumFileSlider"
 import { useState } from "react"
 import FileTypeButton from "./FileTypeButton"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 const fileTypes = [
   { fileType: "Google Docs", src: "/google-docs.svg" },
@@ -52,6 +60,20 @@ export default function ScanButton() {
           </FieldSet>
           <Field>
             <Label htmlFor="last-modified-1">Last Modified</Label>
+            <Select>
+              <SelectTrigger id="last-modified-1" className="w-full max-w-40">
+                <SelectValue placeholder="Select option" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="Last 30 days">Last 30 days</SelectItem>
+                  <SelectItem value="Last 90 days">Last 90 days</SelectItem>
+                  <SelectItem value="Last year">Last year</SelectItem>
+                  <SelectItem value="Last 2 years">Last 2 years</SelectItem>
+                  <SelectItem value="All files">All files</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </Field>
         </FieldGroup>
         <DialogFooter>
