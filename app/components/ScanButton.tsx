@@ -16,6 +16,14 @@ import { MinimumFileSlider } from "./MinimumFileSlider"
 import { useState } from "react"
 import FileTypeButton from "./FileTypeButton"
 
+const fileTypes = [
+  { fileType: "Image", src: "/google-image.svg" },
+  { fileType: "Video", src: "/google-video.svg" },
+  { fileType: "PDF", src: "/google-pdf.svg" },
+  { fileType: "Google Docs", src: "/google-docs.svg" },
+  { fileType: "Google Sheets", src: "/google-sheets.svg" },
+  { fileType: "Google Slides", src: "/google-slides.svg" },
+]
 export default function ScanButton() {
   const [open, setOpen] = useState(true)
 
@@ -34,11 +42,13 @@ export default function ScanButton() {
             <Label htmlFor="file-size-1">Minimum File Size</Label>
             <MinimumFileSlider />
           </Field>
-          <FieldSet>
+          <FieldSet className="flex items-center justify-center">
             <FieldLegend variant="label">File Type</FieldLegend>
-            <FileTypeButton fileType="Image" />
-            <FileTypeButton fileType="Document" />
-            <FileTypeButton fileType="Video" />
+            <div className="grid w-3/4 grid-cols-2 justify-items-center gap-x-16 gap-y-4 min-[480px]:grid-cols-3">
+              {fileTypes.map(({ fileType, src }) => (
+                <FileTypeButton key={fileType} fileType={fileType} src={src} />
+              ))}
+            </div>
           </FieldSet>
           <Field>
             <Label htmlFor="last-modified-1">Last Modified</Label>
