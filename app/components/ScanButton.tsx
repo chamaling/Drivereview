@@ -49,7 +49,14 @@ export default function ScanButton() {
   const [rangeValue, setRangeValue] = useState(sliderValueToFileSize(0))
   const [modifiedValue, setModifiedValue] = useState("Last 30 days")
   const [fileTypeState, dispatchFileType] = useReducer(fileTypeReducer, {})
-
+  function handleClick() {
+    const data = {
+      "minimum-file-size": rangeValue,
+      "last-modified": modifiedValue,
+      "file-types": fileTypeState,
+    }
+    console.log(data)
+  }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={<Button>Scan drive</Button>} />
@@ -102,7 +109,7 @@ export default function ScanButton() {
         </FieldGroup>
         <DialogFooter>
           <DialogClose render={<Button variant="outline">Cancel</Button>} />
-          <Button type="submit">Scan</Button>
+          <Button onClick={handleClick}>Scan</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
