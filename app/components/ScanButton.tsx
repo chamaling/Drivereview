@@ -29,7 +29,7 @@ import { sliderValueToFileSize } from "@/app/lib/sliderHelper"
 import { fileTypeReducer, type FileButton } from "../reducers/fileTypeReducer"
 import { useReducer } from "react"
 import { clientFiltersSchema } from "../schemas/filterSchema"
-
+import { scanDriveAction } from "@/app/actions/scanDriveAction"
 const fileTypeOptions: FileButton[] = [
   { fileType: "Docs", src: "/google-docs.svg" },
   { fileType: "Sheets", src: "/google-sheets.svg" },
@@ -53,7 +53,7 @@ export default function ScanButton() {
   const [fileTypeState, dispatchFileType] = useReducer(fileTypeReducer, {})
   const [error, setError] = useState<string | null>(null)
 
-  function handleClick() {
+  async function handleClick() {
     const data = {
       "minimum-file-size": rangeValue,
       "last-modified": modifiedValue,
@@ -61,12 +61,11 @@ export default function ScanButton() {
     }
 
     try {
-      clientFiltersSchema.parse(data)
-      console.log("Filters are valid:", data)
+      const validatedData = clientFiltersSchema.parse(data)
+      await scanDriveAction(validatedData)
     } catch (error) {
       if (error instanceof ZodError) {
         const firstError = error.issues[0]
-        console.log("Validation error:", firstError.message)
         setError(firstError.message)
       } else {
         setError("An unexpected error occurred. Please try again.")
