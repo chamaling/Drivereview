@@ -83,7 +83,7 @@ export default function ScanButton() {
             Select the criteria for which files you want to scan.
           </DialogDescription>
         </DialogHeader>
-        <FieldGroup>
+        <FieldGroup aria-describedby={error ? "form-error" : undefined}>
           <Field>
             <Label htmlFor="file-size-1">Minimum File Size</Label>
             <MinimumFileSlider value={rangeValue} setValue={setRangeValue} />
@@ -122,7 +122,11 @@ export default function ScanButton() {
               </SelectContent>
             </Select>
           </Field>
-          {error && <p className="text-sm text-red-500">{error}</p>}
+          {error && (
+            <p className="text-sm text-red-500" id="form-error">
+              {error}
+            </p>
+          )}
         </FieldGroup>
         <DialogFooter>
           <DialogClose render={<Button variant="outline">Cancel</Button>} />
