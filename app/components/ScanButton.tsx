@@ -24,8 +24,14 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { sliderValueToFileSize } from "@/app/lib/sliderHelper"
+import {
+  type FileType,
+  fileTypeReducer,
+  type FileButton,
+} from "../reducers/fileTypeReducer"
+import { useReducer } from "react"
 
-const fileTypes = [
+const fileTypeOptions: FileButton[] = [
   { fileType: "Docs", src: "/google-docs.svg" },
   { fileType: "Sheets", src: "/google-sheets.svg" },
   { fileType: "Slides", src: "/google-slides.svg" },
@@ -33,7 +39,6 @@ const fileTypes = [
   { fileType: "Video", src: "/google-video.svg" },
   { fileType: "PDF", src: "/google-pdf.svg" },
 ]
-
 const modifiedOptions = [
   "Last 30 days",
   "Last 90 days",
@@ -41,10 +46,13 @@ const modifiedOptions = [
   "Last 2 years",
   "All files",
 ]
+
 export default function ScanButton() {
   const [open, setOpen] = useState(true)
   const [rangeValue, setRangeValue] = useState(sliderValueToFileSize(0))
   const [modifiedValue, setModifiedValue] = useState("Last 30 days")
+  const [fileTypeState, dispatchFileType] = useReducer(fileTypeReducer, {})
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={<Button>Scan drive</Button>} />
@@ -63,8 +71,14 @@ export default function ScanButton() {
           <FieldSet className="flex items-center justify-center">
             <FieldLegend variant="label">File Type</FieldLegend>
             <div className="grid w-3/4 grid-cols-3 justify-items-center gap-x-16 gap-y-4">
-              {fileTypes.map(({ fileType, src }) => (
-                <FileTypeButton key={fileType} fileType={fileType} src={src} />
+              {fileTypeOptions.map((option) => (
+                <FileTypeButton
+                  key={option.fileType}
+                  fileType={option.fileType}
+                  checked={!!fileTypeState[option.fileType]}
+                  src={option.src}
+                  dispatchToggle={dispatchFileType}
+                />
               ))}
             </div>
           </FieldSet>
