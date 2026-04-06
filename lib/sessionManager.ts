@@ -16,7 +16,11 @@ type Session = {
 
 type SessionStore = Map<SessionID, Session>
 
-const sessions: SessionStore = new Map()
+declare global {
+  var sessions: SessionStore | undefined
+}
+
+const sessions: SessionStore = (globalThis.sessions ??= new Map())
 
 export function createSessionID(): SessionID {
   return crypto.randomUUID() as SessionID
