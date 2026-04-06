@@ -33,3 +33,4 @@ export const clientFiltersSchema = z.object({
 })
 
 export type ClientFilters = z.infer<typeof clientFiltersSchema>
+export type FileType = z.infer<typeof fileTypeEnum>
