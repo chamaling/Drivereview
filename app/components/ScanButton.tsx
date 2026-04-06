@@ -34,6 +34,13 @@ const fileTypes = [
   { fileType: "PDF", src: "/google-pdf.svg" },
 ]
 
+const modifiedOptions = [
+  "Last 30 days",
+  "Last 90 days",
+  "Last year",
+  "Last 2 years",
+  "All files",
+]
 export default function ScanButton() {
   const [open, setOpen] = useState(true)
   const [rangeValue, setRangeValue] = useState(sliderValueToFileSize(0))
@@ -72,11 +79,11 @@ export default function ScanButton() {
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="Last 30 days">Last 30 days</SelectItem>
-                  <SelectItem value="Last 90 days">Last 90 days</SelectItem>
-                  <SelectItem value="Last year">Last year</SelectItem>
-                  <SelectItem value="Last 2 years">Last 2 years</SelectItem>
-                  <SelectItem value="All files">All files</SelectItem>
+                  {modifiedOptions.map((option) => (
+                    <SelectItem key={option} value={option}>
+                      {option}
+                    </SelectItem>
+                  ))}
                 </SelectGroup>
               </SelectContent>
             </Select>
