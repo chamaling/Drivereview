@@ -24,7 +24,7 @@ export const clientFiltersSchema = z.object({
       "Maximum file size must be less than 100 GB."
     ), // Max 100 GB
   "file-types": z
-    .record(fileTypeEnum, z.boolean())
+    .record(fileTypeEnum, z.boolean().optional())
     .refine(
       (record) => Object.values(record).some((value) => value === true),
       "At least one file type must be selected."

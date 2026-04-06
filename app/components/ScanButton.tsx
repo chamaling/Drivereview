@@ -1,4 +1,6 @@
 "use client"
+import { ZodError } from "zod"
+
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -25,8 +27,8 @@ import {
 } from "@/components/ui/select"
 import { sliderValueToFileSize } from "@/app/lib/sliderHelper"
 import { fileTypeReducer, type FileButton } from "../reducers/fileTypeReducer"
-
 import { useReducer } from "react"
+import { clientFiltersSchema } from "../schemas/filterSchema"
 
 const fileTypeOptions: FileButton[] = [
   { fileType: "Docs", src: "/google-docs.svg" },
@@ -49,13 +51,27 @@ export default function ScanButton() {
   const [rangeValue, setRangeValue] = useState(sliderValueToFileSize(0))
   const [modifiedValue, setModifiedValue] = useState("Last 30 days")
   const [fileTypeState, dispatchFileType] = useReducer(fileTypeReducer, {})
+  const [error, setError] = useState<string | null>(null)
+
   function handleClick() {
     const data = {
       "minimum-file-size": rangeValue,
       "last-modified": modifiedValue,
       "file-types": fileTypeState,
     }
-    console.log(data)
+
+    try {
+      clientFiltersSchema.parse(data)
+      console.log("Filters are valid:", data)
+    } catch (error) {
+      if (error instanceof ZodError) {
+        const firstError = error.issues[0]
+        console.log("Validation error:", firstError.message)
+        setError(firstError.message)
+      } else {
+        setError("An unexpected error occurred. Please try again.")
+      }
+    }
   }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -106,6 +122,7 @@ export default function ScanButton() {
               </SelectContent>
             </Select>
           </Field>
+          {error && <p className="text-sm text-red-500">{error}</p>}
         </FieldGroup>
         <DialogFooter>
           <DialogClose render={<Button variant="outline">Cancel</Button>} />
