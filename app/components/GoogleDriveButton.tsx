@@ -65,7 +65,12 @@ export default function GoogleDriveButton() {
         onLoad={handleGoogleScriptLoad}
         onError={handleGoogleScriptError}
       />
-      <Button className="py-5" onClick={handleButtonClick} disabled={isLoading}>
+      <Button
+        className="py-5"
+        onClick={handleButtonClick}
+        disabled={isLoading}
+        aria-invalid={!!error}
+      >
         <Image
           src="/google-drive-icon.png"
           alt="Google Drive Icon"
