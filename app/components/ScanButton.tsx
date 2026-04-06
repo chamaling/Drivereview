@@ -24,11 +24,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { sliderValueToFileSize } from "@/app/lib/sliderHelper"
-import {
-  type FileType,
-  fileTypeReducer,
-  type FileButton,
-} from "../reducers/fileTypeReducer"
+import { fileTypeReducer, type FileButton } from "../reducers/fileTypeReducer"
+
 import { useReducer } from "react"
 
 const fileTypeOptions: FileButton[] = [

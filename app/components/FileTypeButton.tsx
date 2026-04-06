@@ -2,7 +2,9 @@ import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import Image from "next/image"
 import { Dispatch } from "react"
-import type { FileType, FileTypeAction } from "@/app/reducers/fileTypeReducer"
+import type { FileTypeAction } from "@/app/reducers/fileTypeReducer"
+import type { FileType } from "@/app/schemas/filterSchema"
+
 export default function FileTypeButton({
   fileType,
   src,

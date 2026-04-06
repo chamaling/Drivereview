@@ -1,4 +1,4 @@
-export type FileType = "Docs" | "Sheets" | "Slides" | "Image" | "Video" | "PDF"
+import { FileType } from "@/app/schemas/filterSchema"
 export type FileGroup = Partial<Record<FileType, boolean>>
 export type FileTypeAction = { type: "TOGGLE_FILE_TYPE"; payload: FileType }
 export type FileButton = {
