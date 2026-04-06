@@ -37,6 +37,7 @@ const fileTypes = [
 export default function ScanButton() {
   const [open, setOpen] = useState(true)
   const [rangeValue, setRangeValue] = useState(sliderValueToFileSize(0))
+  const [modifiedValue, setModifiedValue] = useState("Last 30 days")
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={<Button>Scan drive</Button>} />
@@ -62,7 +63,10 @@ export default function ScanButton() {
           </FieldSet>
           <Field>
             <Label htmlFor="last-modified-1">Last Modified</Label>
-            <Select>
+            <Select
+              value={modifiedValue}
+              onValueChange={(value) => setModifiedValue(value as string)}
+            >
               <SelectTrigger id="last-modified-1" className="w-full max-w-40">
                 <SelectValue placeholder="Select option" />
               </SelectTrigger>
