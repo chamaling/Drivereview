@@ -23,6 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { sliderValueToFileSize } from "@/app/lib/sliderHelper"
 
 const fileTypes = [
   { fileType: "Docs", src: "/google-docs.svg" },
@@ -32,9 +33,10 @@ const fileTypes = [
   { fileType: "Video", src: "/google-video.svg" },
   { fileType: "PDF", src: "/google-pdf.svg" },
 ]
+
 export default function ScanButton() {
   const [open, setOpen] = useState(true)
-
+  const [rangeValue, setRangeValue] = useState(sliderValueToFileSize(0))
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={<Button>Scan drive</Button>} />
@@ -48,7 +50,7 @@ export default function ScanButton() {
         <FieldGroup>
           <Field>
             <Label htmlFor="file-size-1">Minimum File Size</Label>
-            <MinimumFileSlider />
+            <MinimumFileSlider value={rangeValue} setValue={setRangeValue} />
           </Field>
           <FieldSet className="flex items-center justify-center">
             <FieldLegend variant="label">File Type</FieldLegend>

@@ -1,43 +1,8 @@
-"use client"
-
 import * as React from "react"
 
 import { Slider } from "@/components/ui/slider"
+import { sliderValueToFileSize } from "@/app/lib/sliderHelper"
 
-function snapFileSize(bytes: number): number {
-  if (bytes >= 1e10) {
-    // snap to nearest 5 GB
-    return Math.round(bytes / 5e9) * 5e9
-  }
-
-  if (bytes >= 1e9) {
-    // snap to nearest 0.1 GB
-    return Math.round(bytes / 1e8) * 1e8
-  }
-
-  if (bytes >= 1e7) {
-    // snap to nearest 10 MB
-    return Math.round(bytes / 1e7) * 1e7
-  }
-
-  // snap to nearest 1 MB
-  return Math.round(bytes / 1e6) * 1e6
-}
-
-/*Users may have files that range from MB to GB, so we need a clean logarithmic mapping
- * so the user feels they have good control
- */
-function sliderValueToFileSize(sliderValue: number): number {
-  const minFileSize = 1e6 // 1 MB
-  const maxFileSize = 1e11 // 100 GB
-
-  const logMin = Math.log10(minFileSize)
-  const logMax = Math.log10(maxFileSize)
-
-  const logValue = logMin + (logMax - logMin) * (sliderValue / 100)
-  const fileSize = Math.pow(10, logValue)
-  return snapFileSize(fileSize)
-}
 function formatFileSize(fileSizeInBytes: number): string {
   if (fileSizeInBytes >= 1e9) {
     return (fileSizeInBytes / 1e9).toFixed(2) + " GB"
@@ -46,11 +11,14 @@ function formatFileSize(fileSizeInBytes: number): string {
   }
 }
 
-export function MinimumFileSlider() {
-  const [value, setValue] = React.useState(sliderValueToFileSize(0))
-
+export function MinimumFileSlider({
+  value,
+  setValue,
+}: {
+  value: number
+  setValue: (value: number) => void
+}) {
   function handleChange(newValue: number) {
-    console.log(newValue)
     setValue(sliderValueToFileSize(newValue))
   }
 

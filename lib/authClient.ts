@@ -1,3 +1,4 @@
+import "server-only"
 import { actionClient } from "./actionClient"
 import { getSession, type SessionID } from "./sessionManager"
 import { cookies } from "next/headers"
