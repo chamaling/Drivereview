@@ -8,5 +8,5 @@ export const scanDriveAction = authClient
   .action(async ({ parsedInput, ctx }) => {
     const oauthClient = ctx.oauthClient
 
-    await getDriveFiles(parsedInput, oauthClient)
+    await getDriveFiles(oauthClient)
   })
