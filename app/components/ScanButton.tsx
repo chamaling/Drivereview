@@ -29,7 +29,8 @@ import { sliderValueToFileSize } from "@/app/lib/sliderHelper"
 import { fileTypeReducer, type FileButton } from "../reducers/fileTypeReducer"
 import { useReducer } from "react"
 import { clientFiltersSchema } from "../schemas/filterSchema"
-import { scanDriveAction } from "@/app/actions/scanDriveAction"
+import { useRouter } from "next/navigation"
+
 const fileTypeOptions: FileButton[] = [
   { fileType: "Docs", src: "/google-docs.svg" },
   { fileType: "Sheets", src: "/google-sheets.svg" },
@@ -52,6 +53,7 @@ export default function ScanButton() {
   const [modifiedValue, setModifiedValue] = useState("Last 30 days")
   const [fileTypeState, dispatchFileType] = useReducer(fileTypeReducer, {})
   const [error, setError] = useState<string | null>(null)
+  const router = useRouter()
 
   async function handleClick() {
     const data = {
@@ -62,7 +64,13 @@ export default function ScanButton() {
 
     try {
       const validatedData = clientFiltersSchema.parse(data)
-      await scanDriveAction(validatedData)
+      const searchParams = new URLSearchParams({
+        "minimum-file-size": validatedData["minimum-file-size"].toString(),
+        "last-modified": validatedData["last-modified"],
+        "file-types": JSON.stringify(validatedData["file-types"]),
+      })
+      const url = `/dashboard?${searchParams.toString()}`
+      router.replace(url)
     } catch (error) {
       if (error instanceof ZodError) {
         const firstError = error.issues[0]
