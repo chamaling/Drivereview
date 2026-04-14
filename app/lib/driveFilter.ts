@@ -1,6 +1,6 @@
 import "server-only"
-
 import { clientFiltersSchema, ClientFilters } from "../schemas/filterSchema"
+import { serverFilters, type GlobalFilters } from "./serverFilters"
 
 function validateClientFilters(filters: unknown): ClientFilters {
   const result = clientFiltersSchema.safeParse(filters)
@@ -9,4 +9,12 @@ function validateClientFilters(filters: unknown): ClientFilters {
   }
 
   return result.data
+}
+
+export function getGlobalFilters(clientFilters: unknown): GlobalFilters {
+  const validatedClientFilters = validateClientFilters(clientFilters)
+  return {
+    ...serverFilters,
+    ...validatedClientFilters,
+  }
 }
