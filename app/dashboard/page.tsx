@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/empty"
 import ScanButton from "../components/ScanButton"
 import * as z from "zod"
+import { scanDriveAction } from "../actions/scanDriveAction"
 
 const searchParamsSchema = z.union([
   z
@@ -38,9 +39,12 @@ export default async function Page({
       "Invalid filter parameters: " + parsedSearchParams.error.message
     )
   }
+  const userFilters = parsedSearchParams.data as Parameters<
+    typeof scanDriveAction
+  >[0]
 
-  if (Object.keys(parsedSearchParams.data).length > 0) {
-    console.log("Parsed search parameters:", parsedSearchParams.data)
+  if (true) {
+    const result = await scanDriveAction(userFilters)
     return <p>Testing</p>
   }
 
