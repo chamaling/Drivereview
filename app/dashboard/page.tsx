@@ -7,6 +7,7 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty"
 import ScanButton from "../components/ScanButton"
+
 export default async function Page({
   searchParams,
 }: {

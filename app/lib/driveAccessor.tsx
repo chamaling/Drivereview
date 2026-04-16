@@ -16,7 +16,9 @@ export async function getDriveFiles(
   const fileList = await drive.files.list({
     pageSize: 3,
     q: buildDriveQuery(globalFilters),
-    fields: "files(id, name, mimeType, trashed, size)",
+    fields: "files(id,name,mimeType,trashed,size)",
+    orderBy: "quotaBytesUsed desc",
   })
+
   console.log("Retrieved files:", fileList.data.files)
 }
