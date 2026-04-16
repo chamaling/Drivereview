@@ -1,7 +1,6 @@
-import { getGlobalFilters } from "./driveFilter"
-import { ClientFilters } from "../schemas/filterSchema"
+import { GlobalFilters } from "./serverFilters"
 
-export async function buildDriveQuery(clientFilters: ClientFilters) {
-  const globalFilters = getGlobalFilters(clientFilters)
-  let currentQuery = ``
+export function buildDriveQuery(globalFilters: GlobalFilters) {
+  const currQuery = `sharedWithMe=${globalFilters.shared}`
+  return currQuery
 }
