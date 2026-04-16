@@ -4,7 +4,6 @@ import { getSession, type SessionID } from "./sessionManager"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import makeGoogleAuth from "./makeGoogleAuth"
-import { logoutAction } from "@/app/actions/logoutAction"
 
 export const authClient = actionClient.use(async ({ next }) => {
   const cookieStore = await cookies()
@@ -16,7 +15,7 @@ export const authClient = actionClient.use(async ({ next }) => {
 
   const session = getSession(sessionId)
   if (!session) {
-    redirect("/logout")
+    redirect("/api/logout")
   }
 
   const oauthClient = makeGoogleAuth(session.tokens)
