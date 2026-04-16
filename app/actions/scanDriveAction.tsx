@@ -1,7 +1,7 @@
 "use server"
 import { authClient } from "@/lib/authClient"
-import { clientFiltersSchema } from "@/app/schemas/filterSchema"
 import { getDriveFiles } from "@/app/lib/driveAccessor"
+import { clientFiltersSchema } from "../schemas/filterSchema"
 
 export const scanDriveAction = authClient
   .inputSchema(clientFiltersSchema)

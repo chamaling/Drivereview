@@ -11,10 +11,9 @@ function validateClientFilters(filters: unknown): ClientFilters {
   return result.data
 }
 
-export function getGlobalFilters(clientFilters: unknown): GlobalFilters {
-  const validatedClientFilters = validateClientFilters(clientFilters)
+export function getGlobalFilters(clientFilters: ClientFilters): GlobalFilters {
   return {
     ...serverFilters,
-    ...validatedClientFilters,
+    ...clientFilters,
   }
 }
