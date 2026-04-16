@@ -16,7 +16,12 @@ const searchParamsSchema = z.union([
       "last-modified": z.string(),
       "file-types": z.string(),
     })
-    .strict(),
+    .strict()
+    .transform((data) => ({
+      "minimum-file-size": parseInt(data["minimum-file-size"], 10),
+      "last-modified": data["last-modified"],
+      "file-types": JSON.parse(data["file-types"]),
+    })),
   z.object({}).strict(),
 ])
 
