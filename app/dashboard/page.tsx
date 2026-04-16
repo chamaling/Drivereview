@@ -7,6 +7,18 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty"
 import ScanButton from "../components/ScanButton"
+import * as z from "zod"
+
+const searchParamsSchema = z.union([
+  z
+    .object({
+      "minimum-file-size": z.string(),
+      "last-modified": z.string(),
+      "file-types": z.string(),
+    })
+    .strict(),
+  z.object({}).strict(),
+])
 
 export default async function Page({
   searchParams,
@@ -14,9 +26,16 @@ export default async function Page({
   searchParams: Promise<{ [key: string]: string | undefined }>
 }) {
   const resolvedSearchParams = await searchParams
+  const parsedSearchParams = searchParamsSchema.safeParse(resolvedSearchParams)
 
-  if (Object.keys(resolvedSearchParams).length > 0) {
-    console.log(resolvedSearchParams)
+  if (!parsedSearchParams.success) {
+    throw new Error(
+      "Invalid filter parameters: " + parsedSearchParams.error.message
+    )
+  }
+
+  if (Object.keys(parsedSearchParams.data).length > 0) {
+    console.log("Parsed search parameters:", parsedSearchParams.data)
     return <p>Testing</p>
   }
 
