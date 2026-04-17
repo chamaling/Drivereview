@@ -35,9 +35,7 @@ export default async function Page({
   const parsedSearchParams = searchParamsSchema.safeParse(resolvedSearchParams)
 
   if (!parsedSearchParams.success) {
-    throw new Error(
-      "Invalid filter parameters: " + parsedSearchParams.error.message
-    )
+    throw new Error("Invalid search parameters.")
   }
   const userFilters = parsedSearchParams.data as Parameters<
     typeof scanDriveAction
