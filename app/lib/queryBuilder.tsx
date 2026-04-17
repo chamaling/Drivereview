@@ -69,5 +69,13 @@ export function buildDriveQuery(globalFilters: GlobalFilters) {
   if (lastModifiedString) {
     queries.push(`modifiedTime > '${lastModifiedString}'`)
   }
+
+  const fileTypesString = convertFileTypesArrayToQueryString(
+    globalFilters["file-types"]
+  )
+  if (fileTypesString) {
+    queries.push(fileTypesString)
+  }
+
   return queries.join(" and ")
 }

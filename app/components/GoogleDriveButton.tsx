@@ -54,7 +54,7 @@ export default function GoogleDriveButton() {
     if (codeClient.current) {
       codeClient.current.requestCode()
     } else {
-      setError("Failed to initialize Google OAuth client.")
+      setError("Failed to initialize Google OAuth client. Please try again.")
     }
   }
   return (
