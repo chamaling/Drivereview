@@ -41,27 +41,25 @@ export default async function Page({
     typeof scanDriveAction
   >[0]
 
-  if (true) {
-    const result = await scanDriveAction(userFilters)
-    return <p>Testing</p>
-  }
-
-  return (
-    <div className="flex h-screen flex-col items-center justify-center">
-      <div className="my-auto flex flex-col items-center justify-center">
-        <Empty>
-          <EmptyHeader>
-            <EmptyMedia variant="icon" className="size-12 bg-transparent">
-              <EmptyIcon className="size-full!" weight="fill" />
-            </EmptyMedia>
-            <EmptyTitle className="text-lg">No drive data</EmptyTitle>
-            <EmptyDescription className="text-xs">
-              Click the button below to scan your drive!
-            </EmptyDescription>
-          </EmptyHeader>
-        </Empty>
-        <ScanButton />
+  if (Object.keys(userFilters).length === 0) {
+    return (
+      <div className="flex h-screen flex-col items-center justify-center">
+        <div className="my-auto flex flex-col items-center justify-center">
+          <Empty>
+            <EmptyHeader>
+              <EmptyMedia variant="icon" className="size-12 bg-transparent">
+                <EmptyIcon className="size-full!" weight="fill" />
+              </EmptyMedia>
+              <EmptyTitle className="text-lg">No drive data</EmptyTitle>
+              <EmptyDescription className="text-xs">
+                Click the button below to scan your drive!
+              </EmptyDescription>
+            </EmptyHeader>
+          </Empty>
+          <ScanButton />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
+  return <p>Testing</p>
 }
