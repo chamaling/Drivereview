@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
 import { type SessionID } from "@/lib/sessionManager"
-
 const publicRoutes = ["/"]
-
+const protectedRoutes = ["/dashboard"]
 export default function proxy(request: NextRequest) {
   const sessionId = request.cookies.get("session")?.value as SessionID
   const { pathname } = request.nextUrl
 
   if (!publicRoutes.includes(pathname)) {
-    if (!sessionId) {
+    if (!sessionId && protectedRoutes.includes(pathname)) {
       return NextResponse.redirect(new URL("/", request.url))
     }
   }
