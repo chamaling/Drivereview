@@ -35,7 +35,9 @@ export default async function Page({
   const parsedSearchParams = searchParamsSchema.safeParse(resolvedSearchParams)
 
   if (!parsedSearchParams.success) {
-    throw new Error("Invalid search parameters.")
+    throw new Error(
+      "The link you followed has invalid data. Go back to home and try again."
+    )
   }
   const userFilters = parsedSearchParams.data as Parameters<
     typeof scanDriveAction
