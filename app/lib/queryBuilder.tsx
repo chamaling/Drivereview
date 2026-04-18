@@ -16,7 +16,7 @@ function convertLastModifiedStringtoUTCTimestamp(
   } else {
     return ""
   }
-  return now.toUTCString()
+  return now.toISOString()
 }
 
 function convertFileTypeToMimeType(
@@ -24,17 +24,17 @@ function convertFileTypeToMimeType(
 ): string {
   switch (fileType) {
     case "Docs":
-      return "application/vnd.google-apps.document"
+      return "'application/vnd.google-apps.document'"
     case "Sheets":
-      return "application/vnd.google-apps.spreadsheet"
+      return "'application/vnd.google-apps.spreadsheet'"
     case "Slides":
-      return "application/vnd.google-apps.presentation"
+      return "'application/vnd.google-apps.presentation'"
     case "Image":
-      return "image/*"
+      return "'image/*'"
     case "PDF":
-      return "application/pdf"
+      return "'application/pdf'"
     case "Video":
-      return "video/*"
+      return "'video/*'"
   }
 }
 function convertFileTypesArrayToQueryString(
