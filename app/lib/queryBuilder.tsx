@@ -1,3 +1,4 @@
+import "server-only"
 import { GlobalFilters } from "./serverFilters"
 
 function convertLastModifiedStringtoUTCTimestamp(
@@ -76,6 +77,7 @@ export function buildDriveQuery(globalFilters: GlobalFilters) {
   if (fileTypesString) {
     queries.push(fileTypesString)
   }
+  console.log("Built query:", queries.join(" and "))
 
   return queries.join(" and ")
 }
