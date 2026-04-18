@@ -63,5 +63,6 @@ export default async function Page({
       </div>
     )
   }
+  const scanResult = await scanDriveAction(userFilters)
   return <p>Testing</p>
 }
