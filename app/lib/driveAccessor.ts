@@ -16,9 +16,19 @@ export async function getDriveFiles(
   const fileList = await drive.files.list({
     pageSize: 3,
     q: buildDriveQuery(globalFilters),
-    fields: "files(id,name,mimeType,trashed,size)",
+    fields:
+      "files(id,name,mimeType,trashed,size,capabilities,contentRestrictions)",
     orderBy: "quotaBytesUsed desc",
   })
+  let files = fileList.data.files || []
 
-  console.log("Retrieved files:", fileList.data.files)
+  // user shouldn't be shown files they can't trash since its main action to review
+  files = files.filter((file) =>
+    file.capabilities ? !!file.capabilities.canTrash : false
+  )
+
+  // user likely shouldn't trash files with content restrictions, so filter them
+  files = files.filter((file) => !("contentRestrictions" in file))
+
+  return files
 }
