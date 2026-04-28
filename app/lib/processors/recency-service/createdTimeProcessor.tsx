@@ -24,6 +24,11 @@ class CreatedTimeProcessor extends Processor {
   }
 }
 
+/*
+The time a file was created
+is a strong indicator of recency,
+so it should have a higher weight compared to other factors 
+*/
 const createdTimeProcessor = new CreatedTimeProcessor(0.5)
 
 export default createdTimeProcessor
