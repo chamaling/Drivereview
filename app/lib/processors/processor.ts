@@ -9,6 +9,6 @@ export default abstract class Processor {
     this.weight = weight
   }
 
-  weight: number
+  private weight: number
   abstract process(file: drive_v3.Schema$File): number
 }
