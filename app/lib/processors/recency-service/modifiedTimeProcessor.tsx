@@ -19,7 +19,7 @@ class ModifiedTimeProcessor extends Processor {
       return 1
     }
 
-    return 1 / ageInDays
+    return 1 / ageInDays ** 2
   }
 }
 const modifiedTimeProcessor = new ModifiedTimeProcessor(0.33)
