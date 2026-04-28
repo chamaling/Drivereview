@@ -24,6 +24,6 @@ class CreatedTimeProcessor extends Processor {
   }
 }
 
-const createdTimeProcessor = new CreatedTimeProcessor(0.33)
+const createdTimeProcessor = new CreatedTimeProcessor(0.5)
 
 export default createdTimeProcessor
