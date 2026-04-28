@@ -22,6 +22,12 @@ class ModifiedTimeProcessor extends Processor {
     return 1 / ageInDays ** 2
   }
 }
+
+/*
+The time a file was last modified is a moderately strong indicator of recency,
+due to the fact that users modify files shortly after creating them, and it
+indicates activity, so it should have a moderate weight.
+*/
 const modifiedTimeProcessor = new ModifiedTimeProcessor(0.33)
 
 export default modifiedTimeProcessor
