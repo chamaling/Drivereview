@@ -12,9 +12,23 @@ class MimeTypeProcessor extends Processor {
     if (!file.mimeType) {
       return 0
     }
+    const mimeType = file.mimeType
 
-    // Process based on MIME type
-    return 1
+    switch (mimeType) {
+      case "application/vnd.google-apps.document":
+      case "application/vnd.google-apps.spreadsheet":
+      case "application/vnd.google-apps.presentation":
+        // documents are likely to be edited or necessary, so they get a higher score
+        return 1
+      case "image/jpeg":
+      case "image/png":
+      case "video/mp4":
+        // images and videos are less likely so they get a lower score
+        return 0.5
+      default:
+        // other file types are even less likely to be needed, so they get a lower score
+        return 0.25
+    }
   }
 }
 
@@ -23,6 +37,6 @@ The MIME type can prvoide some indicator of recency,
 as documents are much more likely to be edited than images or videos
 and needed 
 */
-const mimeTypeProcessor = new MimeTypeProcessor(0.27)
+const mimeTypeProcessor = new MimeTypeProcessor(0.25)
 
 export default mimeTypeProcessor
