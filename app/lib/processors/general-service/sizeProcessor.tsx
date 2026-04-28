@@ -14,13 +14,13 @@ class SizeProcessor extends Processor {
     }
     const sizeInMB = parseInt(file.size) / (1024 * 1024)
 
-    // Larger files are more efficient to delete, so they should have a higher score
+    // Larger files are more efficient to delete, so they should have a lower score
     if (sizeInMB < 1) {
-      return 0
+      return 1
     } else if (sizeInMB < 100) {
       return 0.5
     } else {
-      return 1
+      return 0
     }
   }
 }
