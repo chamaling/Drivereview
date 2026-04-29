@@ -17,7 +17,7 @@ export async function getDriveFiles(
     pageSize: 3,
     q: buildDriveQuery(globalFilters),
     fields:
-      "files(id,name,mimeType,trashed,size,capabilities,contentRestrictions)",
+      "files(id,name,mimeType,trashed,size,capabilities,contentRestrictions,createdTime,modifiedTime,starred)",
     orderBy: "quotaBytesUsed desc",
   })
   let files = fileList.data.files || []
