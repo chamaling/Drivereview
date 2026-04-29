@@ -11,22 +11,34 @@ class ModifiedTimeProcessor extends Processor {
     if (!file.modifiedTime) {
       return 0
     }
+    if (!file.createdTime) {
+      return 0
+    }
     const modifiedTime = new Date(file.modifiedTime).getTime()
     const currentTime = Date.now()
-    const ageInDays = (currentTime - modifiedTime) / (1000 * 60 * 60 * 24)
+    const createdTime = new Date(file.createdTime).getTime()
 
-    if (ageInDays < 1) {
-      return 1
+    const ageSinceCreationInDays =
+      (currentTime - createdTime) / (1000 * 60 * 60 * 24)
+    const ageSinceModificationInDays =
+      (currentTime - modifiedTime) / (1000 * 60 * 60 * 24)
+
+    const creationModificationElapse =
+      ageSinceCreationInDays - ageSinceModificationInDays
+
+    if (creationModificationElapse < 1) {
+      return 0
     }
 
-    return 1 / ageInDays ** 2
+    // files modified more recently after creation are more likely
+    // to be relevant so use a logarithmic scale
+    return Math.max(Math.log10(creationModificationElapse) / 2, 1)
   }
 }
 
 /*
-The time a file was last modified is a moderately strong indicator of recency,
-due to the fact that users modify files shortly after creating them, and it
-indicates activity, so it should have a moderate weight.
+The time a file was last modifeid is a moderate indicator of authority,
+so it should have a moderate weight
 */
 const modifiedTimeProcessor = new ModifiedTimeProcessor(0.33)
 
