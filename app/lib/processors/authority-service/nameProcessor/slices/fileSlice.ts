@@ -1,4 +1,6 @@
 import "server-only"
+import Slice from "./slice"
+
 const fileObject = {
   // images with these keywords are typically default names for photos
   // so likely less important, but not completely unimportant
@@ -24,3 +26,7 @@ const fileObject = {
   // files created like these are duplicates, so usually less important
   "copy of": 0.5,
 }
+
+const fileSlice = new Slice(fileObject)
+
+export default fileSlice

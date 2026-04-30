@@ -1,4 +1,6 @@
 import "server-only"
+import Slice from "./slice"
+
 const financeKeywords: string[] = [
   // Banking & Accounts
   "bank statement",
@@ -93,3 +95,6 @@ const financeKeywords: string[] = [
   "balance sheet",
   "profit and loss",
 ]
+
+const financeSlice = new Slice(financeKeywords, Infinity)
+export default financeSlice

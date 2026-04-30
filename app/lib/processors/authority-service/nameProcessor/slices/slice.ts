@@ -1,5 +1,5 @@
 import "server-only"
-class Slice {
+export default class Slice {
   private regObject: RegExp
   private defaultWeight: number = 1
   private keywordMap: Record<string, number> | null = null

@@ -1,4 +1,6 @@
 import "server-only"
+import Slice from "./slice"
+
 const identityKeywords: string[] = [
   // All of these keywords are related to identity documents
   // which are most cases crucial to keep so these will have higher weights
@@ -58,3 +60,7 @@ const identityKeywords: string[] = [
   "accreditation",
   "credential",
 ]
+
+const identitySlice = new Slice(identityKeywords, Infinity)
+
+export default identitySlice

@@ -1,3 +1,6 @@
+import "server-only"
+import Slice from "./slice"
+
 const healthKeywords: string[] = [
   // Personal Health Records
   "medical record",
@@ -74,3 +77,7 @@ const healthKeywords: string[] = [
   "FMLA",
   "medical leave",
 ]
+
+const healthSlice = new Slice(healthKeywords, Infinity)
+
+export default healthSlice
