@@ -38,7 +38,18 @@ export default class Slice {
       return 1
     }
     if (this.keywordMap) {
-      return this.keywordMap[match[0].toLowerCase()] || this.defaultWeight
+      // choose lowest weight if multiple keywords match
+
+      let lowestWeight = this.defaultWeight
+
+      for (const keyword in match) {
+        const weight = this.keywordMap[match[keyword].toLowerCase()]
+        if (weight && weight < lowestWeight) {
+          lowestWeight = weight
+        }
+      }
+
+      return lowestWeight
     }
     return this.defaultWeight
   }

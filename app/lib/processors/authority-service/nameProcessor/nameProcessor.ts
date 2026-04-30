@@ -2,10 +2,19 @@ import "server-only"
 
 import Processor from "../../processor"
 import { drive_v3 } from "googleapis"
+import Slice from "./slices/slice"
+import fileSlice from "./slices/fileSlice"
+import financeSlice from "./slices/financeSlice"
+import healthSlice from "./slices/healthSlice"
+import identitySlice from "./slices/identitySlice"
 
 class NameProcessor extends Processor {
-  constructor(weight: number) {
+  private slices: Slice[] = []
+  constructor(weight: number, slices?: Slice[]) {
     super(weight)
+    if (slices) {
+      this.slices = slices
+    }
   }
 
   process(file: drive_v3.Schema$File): number {
@@ -13,10 +22,35 @@ class NameProcessor extends Processor {
       return 0
     }
 
-    return 1
+    if (!this.slices) {
+      return 1
+    }
+    let infFound = false
+    let sliceWeight = 1
+
+    for (const slice of this.slices) {
+      const proessedWeight = slice.process(file.name)
+      if (proessedWeight === Infinity) {
+        infFound = true
+        break
+      }
+
+      sliceWeight = Math.min(sliceWeight, proessedWeight)
+    }
+
+    if (infFound) {
+      return 1
+    }
+
+    return sliceWeight
   }
 }
 
-const nameProcessor = new NameProcessor(0.5)
+const nameProcessor = new NameProcessor(0.5, [
+  fileSlice,
+  financeSlice,
+  healthSlice,
+  identitySlice,
+])
 
 export default nameProcessor
