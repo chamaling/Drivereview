@@ -1,3 +1,4 @@
+import "server-only"
 const financeKeywords: string[] = [
   // Banking & Accounts
   "bank statement",

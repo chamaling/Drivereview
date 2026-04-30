@@ -1,3 +1,4 @@
+import "server-only"
 const identityKeywords: string[] = [
   // All of these keywords are related to identity documents
   // which are most cases crucial to keep so these will have higher weights

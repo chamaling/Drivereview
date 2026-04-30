@@ -1,4 +1,5 @@
-const fileobject = {
+import "server-only"
+const fileObject = {
   // images with these keywords are typically default names for photos
   // so likely less important, but not completely unimportant
   img_: 0.5,

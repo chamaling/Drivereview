@@ -1,5 +1,4 @@
-import keywordSettings from "../keywordSettings"
-
+import "server-only"
 class Slice {
   private regObject: RegExp
   private defaultWeight: number = 1
