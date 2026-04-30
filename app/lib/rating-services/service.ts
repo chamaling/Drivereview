@@ -30,7 +30,7 @@ export default class RatingService {
       : 0
   }
 
-  getWeight(): number {
+  public getWeight(): number {
     return this.weight
   }
 }
