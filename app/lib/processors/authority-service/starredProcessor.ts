@@ -23,6 +23,6 @@ Files that are starred are more likely to be needed,
 however users may forget to star important files,
 so it should have a moderate weight and not heavily penalize unstarred files
 */
-const starredProcessor = new StarredProcessor(0.2)
+const starredProcessor = new StarredProcessor(0.1)
 
 export default starredProcessor

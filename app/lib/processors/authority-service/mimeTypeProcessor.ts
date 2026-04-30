@@ -37,6 +37,6 @@ The MIME type can prvoide some indicator of recency,
 as documents are much more likely to be edited than images or videos
 and needed 
 */
-const mimeTypeProcessor = new MimeTypeProcessor(0.25)
+const mimeTypeProcessor = new MimeTypeProcessor(0.1)
 
 export default mimeTypeProcessor

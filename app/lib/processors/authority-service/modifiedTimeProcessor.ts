@@ -40,6 +40,6 @@ class ModifiedTimeProcessor extends Processor {
 The time a file was last modifeid is a moderate indicator of authority,
 so it should have a moderate weight
 */
-const modifiedTimeProcessor = new ModifiedTimeProcessor(0.33)
+const modifiedTimeProcessor = new ModifiedTimeProcessor(0.2)
 
 export default modifiedTimeProcessor
