@@ -2,7 +2,7 @@ import "server-only"
 import type Proccessor from "@/app/lib/processors/processor"
 import { drive_v3 } from "googleapis"
 
-export default abstract class RatingService {
+export default class RatingService {
   constructor(weight: number, processors: Proccessor[]) {
     if (weight < 0) {
       throw new Error("Weight must be a non-negative number")
