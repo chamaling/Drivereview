@@ -5,6 +5,7 @@ import { google as googleApi } from "googleapis"
 import { buildDriveQuery } from "./queryBuilder"
 import { ClientFilters } from "../schemas/filterSchema"
 import { getGlobalFilters } from "./driveFilter"
+import ratingManager from "./ratingManager"
 
 export async function getDriveFiles(
   oauthClient: OAuth2Client,
@@ -14,7 +15,7 @@ export async function getDriveFiles(
   const globalFilters = getGlobalFilters(clientFilters)
 
   const fileList = await drive.files.list({
-    pageSize: 3,
+    pageSize: 200,
     q: buildDriveQuery(globalFilters),
     fields:
       "files(id,name,mimeType,trashed,size,capabilities,contentRestrictions,createdTime,modifiedTime,starred)",
@@ -29,6 +30,17 @@ export async function getDriveFiles(
 
   // user likely shouldn't trash files with content restrictions, so filter them
   files = files.filter((file) => !("contentRestrictions" in file))
+
+  // add rating to each file
+  const filesWithRatings = files.map((file) => ({
+    ...file,
+    rating: ratingManager.getRating(file),
+  }))
+
+  const filesSortedByRating = filesWithRatings.sort(
+    (a, b) => (a.rating || 0) - (b.rating || 0)
+  )
+  console.log("Fetched highest raating: ", JSON.stringify(files[0], null, 2))
 
   return files
 }

@@ -43,7 +43,7 @@ export default class Slice {
       let lowestWeight = this.defaultWeight
 
       for (const keyword in match) {
-        const weight = this.keywordMap[match[keyword].toLowerCase()]
+        const weight = this.keywordMap[keyword.toLowerCase()]
         if (weight && weight < lowestWeight) {
           lowestWeight = weight
         }

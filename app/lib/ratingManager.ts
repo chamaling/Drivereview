@@ -11,8 +11,17 @@ class RatingManager {
 
     for (const service of this.services) {
       const rating = service.aggregate(file)
-      totalRating += rating * service.getWeight()
+      totalRating += rating
       totalWeight += service.getWeight()
+      let serviceName = "authorityService"
+      if (service === recencyService) {
+        serviceName = "recencyService"
+      } else if (service === generalService) {
+        serviceName = "generalService"
+      }
+      console.log(
+        `Rating from ${serviceName} for file ${file.name}: ${rating} with weight ${service.getWeight()}`
+      )
     }
 
     return totalWeight > 0 ? Math.min(totalRating / totalWeight, 1) : 0
