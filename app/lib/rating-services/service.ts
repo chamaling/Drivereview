@@ -16,6 +16,21 @@ export default abstract class RatingService {
   private processors: Proccessor[]
 
   public aggregate(file: drive_v3.Schema$File): number {
-    return 0
+    let accumulatedRating = 0
+    let totalRating = 0
+
+    for (const processor of this.processors) {
+      const rating = processor.process(file)
+      accumulatedRating += rating * processor.getWeight()
+      totalRating += processor.getWeight()
+    }
+
+    return totalRating > 0
+      ? Math.min((accumulatedRating / totalRating) * this.weight, 1)
+      : 0
+  }
+
+  getWeight(): number {
+    return this.weight
   }
 }
