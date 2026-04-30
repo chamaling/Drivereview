@@ -17,6 +17,9 @@ const fileSlice = {
   // since they're untitled, that is a stronger signal that they may be less important
   // so give it a lower score than other default names
   "Untitled (?:document|presentation|spreadsheet)*": 0.25,
+
+  // files created like these are duplicates, so usually less important
+  "Copy of *": 0.5,
 }
 
 export default fileSlice
