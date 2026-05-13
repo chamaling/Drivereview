@@ -1,7 +1,7 @@
 import "server-only"
 export default class Slice {
   private regObject: RegExp
-  private defaultWeight: number = 1
+  private defaultWeight: number = 0
   private keywordMap: Record<string, number> | null = null
   constructor(keywordArray: string[], defaultWeight: number)
   constructor(keywordMap: Record<string, number>)
@@ -17,7 +17,7 @@ export default class Slice {
         )
       }
 
-      this.regObject = new RegExp(`(${keywordObject.join("|")})`, "i")
+      this.regObject = new RegExp(`(${keywordObject.join("|")})`, "gi")
       this.defaultWeight = defaultWeight
     } else {
       if (Array.isArray(keywordObject)) {
@@ -26,23 +26,25 @@ export default class Slice {
         )
       }
       const keywords = Object.keys(keywordObject)
-      this.regObject = new RegExp(`(${keywords.join("|")})`, "i")
-      this.defaultWeight = 1
+      this.regObject = new RegExp(`(${keywords.join("|")})`, "gi")
+      this.defaultWeight = 0
       this.keywordMap = keywordObject
     }
   }
 
   process(name: string): number {
-    const match = name.match(this.regObject)
+    const match = name.toLowerCase().match(this.regObject)
+
     if (!match) {
-      return 1
+      return 0
     }
+
     if (this.keywordMap) {
       // choose lowest weight if multiple keywords match
 
       let lowestWeight = this.defaultWeight
 
-      for (const keyword in match) {
+      for (const keyword of match) {
         const weight = this.keywordMap[keyword.toLowerCase()]
         if (weight && weight < lowestWeight) {
           lowestWeight = weight
