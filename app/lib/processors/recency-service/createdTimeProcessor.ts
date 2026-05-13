@@ -17,10 +17,10 @@ class CreatedTimeProcessor extends Processor {
     const ageInDays = (currentTime - createdTime) / (1000 * 60 * 60 * 24)
 
     if (ageInDays < 1) {
-      return 1
+      return 0
     }
 
-    return 1 / ageInDays
+    return Math.min(ageInDays * -(1 / 14), -0.5) // Cap the score at -0.5 for files older than 14 days
   }
 }
 
