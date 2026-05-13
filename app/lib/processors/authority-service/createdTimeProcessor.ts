@@ -20,9 +20,8 @@ class CreatedTimeProcessor extends Processor {
       return 0
     }
 
-    // older files have higher authority, so use a logarithmic scale for higher scores
-    // 3.65 is used to give a score of 1 for files that are 1 year old (with a division of 2)
-    return Math.max(1, Math.min(0, Math.log10(ageInDays / 3.65) / 2))
+    // older files are more likely to be needed so subtract from them the least
+    return Math.min(Math.max(-1 / ageInDays ** 1.5 / 2, -0.5), 0)
   }
 }
 
