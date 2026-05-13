@@ -19,9 +19,6 @@ class RatingManager {
       } else if (service === generalService) {
         serviceName = "generalService"
       }
-      console.log(
-        `Rating from ${serviceName} for file ${file.name}: ${rating} with weight ${service.getWeight()}`
-      )
     }
 
     return totalWeight > 0 ? Math.min(totalRating / totalWeight, 1) : 0
