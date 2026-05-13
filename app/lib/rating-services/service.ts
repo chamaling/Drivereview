@@ -18,7 +18,7 @@ export default class RatingService {
 
   public aggregate(file: drive_v3.Schema$File): number {
     let accumulatedRating = 1
-    let totalRating = 1
+    let totalRating = 0
 
     for (const processor of this.processors) {
       const rating = processor.process(file)

@@ -26,16 +26,16 @@ class NameProcessor extends Processor {
       return 1
     }
     let infFound = false
-    let sliceWeight = 1
+    let sliceWeight = 0
 
     for (const slice of this.slices) {
-      const proessedWeight = slice.process(file.name)
-      if (proessedWeight === Infinity) {
+      const processedWeight = slice.process(file.name)
+      if (processedWeight === Infinity) {
         infFound = true
         break
       }
 
-      sliceWeight = Math.min(sliceWeight, proessedWeight)
+      sliceWeight = Math.min(sliceWeight, processedWeight)
     }
 
     if (infFound) {

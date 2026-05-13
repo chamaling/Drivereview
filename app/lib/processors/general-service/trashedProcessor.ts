@@ -12,7 +12,6 @@ class TrashedProcessor extends Processor {
     if (file.trashed) {
       return -0.5
     }
-
     return 0
   }
 }
