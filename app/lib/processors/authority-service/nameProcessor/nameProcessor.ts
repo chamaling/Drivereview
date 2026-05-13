@@ -39,7 +39,7 @@ class NameProcessor extends Processor {
     }
 
     if (infFound) {
-      return 1
+      return Infinity
     }
 
     return sliceWeight
