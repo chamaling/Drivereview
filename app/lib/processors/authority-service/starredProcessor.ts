@@ -10,7 +10,7 @@ class StarredProcessor extends Processor {
 
   process(file: drive_v3.Schema$File): number {
     if (file.starred) {
-      return 0.5 // starred files should add to the score as they are more likely to be needed
+      return 1 // starred files should add to the score as they are more likely to be needed
     }
 
     return 0

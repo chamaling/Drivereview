@@ -29,6 +29,6 @@ class CreatedTimeProcessor extends Processor {
 The time a file was created is a strong indicator of authority,
 so it should have high weight and give higher scores to older files
 */
-const createdTimeProcessor = new CreatedTimeProcessor(0.35)
+const createdTimeProcessor = new CreatedTimeProcessor(0.2)
 
 export default createdTimeProcessor

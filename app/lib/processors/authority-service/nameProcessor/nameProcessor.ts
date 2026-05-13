@@ -23,7 +23,7 @@ class NameProcessor extends Processor {
     }
 
     if (!this.slices) {
-      return 1
+      return 0
     }
     let infFound = false
     let sliceWeight = 0
@@ -50,7 +50,7 @@ class NameProcessor extends Processor {
 The name of a file can be a strong indicator of authority, especially if it contains certain keywords,
 so it should have high weight and give higher scores to files with authoritative keywords in their names
 */
-const nameProcessor = new NameProcessor(0.25, [
+const nameProcessor = new NameProcessor(0.5, [
   fileSlice,
   financeSlice,
   healthSlice,
