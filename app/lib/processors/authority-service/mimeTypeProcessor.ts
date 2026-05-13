@@ -19,15 +19,15 @@ class MimeTypeProcessor extends Processor {
       case "application/vnd.google-apps.spreadsheet":
       case "application/vnd.google-apps.presentation":
         // documents are likely to be edited or necessary, so they get a higher score
-        return 1
+        return 0
       case "image/jpeg":
       case "image/png":
       case "video/mp4":
         // images and videos are less likely so they get a lower score
-        return 0.5
+        return -0.5
       default:
         // other file types are even less likely to be needed, so they get a lower score
-        return 0.25
+        return -0.75
     }
   }
 }
