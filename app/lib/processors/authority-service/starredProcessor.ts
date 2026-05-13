@@ -9,12 +9,11 @@ class StarredProcessor extends Processor {
   }
 
   process(file: drive_v3.Schema$File): number {
-    if (!file.starred) {
-      // unstarred files should not be heavily penalized, as users may forget to star important files
-      return 0.5
+    if (file.starred) {
+      return 0.5 // starred files should add to the score as they are more likely to be needed
     }
 
-    return 1
+    return 0
   }
 }
 
