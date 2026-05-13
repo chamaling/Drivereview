@@ -16,10 +16,10 @@ class ModifiedTimeProcessor extends Processor {
     const ageInDays = (currentTime - modifiedTime) / (1000 * 60 * 60 * 24)
 
     if (ageInDays < 1) {
-      return 1
+      return 0
     }
 
-    return 1 / ageInDays ** 2
+    return Math.min(ageInDays * -(1 / 30), -0.33) // Cap the score at -0.33 for files older than 30 days
   }
 }
 
