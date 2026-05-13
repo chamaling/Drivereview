@@ -41,16 +41,5 @@ export async function getDriveFiles(
     (a, b) => (a.rating || 0) - (b.rating || 0)
   )
 
-  const minimizedFiles = filesSortedByRating.map(({ id, name, rating }) => ({
-    id,
-    name,
-    rating,
-  }))
-
-  console.log(
-    "All fetched files with ratings: ",
-    JSON.stringify(minimizedFiles, null, 2)
-  )
-
   return files
 }

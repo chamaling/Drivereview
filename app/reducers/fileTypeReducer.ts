@@ -10,12 +10,6 @@ export function fileTypeReducer(
   state: FileGroup,
   action: FileTypeAction
 ): FileGroup {
-  console.log(
-    "Reducer called with state:",
-    JSON.stringify(state),
-    "and action:",
-    JSON.stringify(action)
-  )
   switch (action.type) {
     case "TOGGLE_FILE_TYPE":
       if (state[action.payload]) {
