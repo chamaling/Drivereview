@@ -25,14 +25,13 @@ class ModifiedTimeProcessor extends Processor {
 
     const creationModificationElapse =
       ageSinceCreationInDays - ageSinceModificationInDays
+    //    return Math.max(Math.log10(creationModificationElapse) / 2, 1)
 
     if (creationModificationElapse < 1) {
-      return 0
+      return -0.5 // this indicates that modification and creation are close, so lower authority as it may be temporary
     }
 
-    // files modified more recently after creation are more likely
-    // to be relevant so use a logarithmic scale
-    return Math.max(Math.log10(creationModificationElapse) / 2, 1)
+    return Math.max(Math.max(-1 / creationModificationElapse ** 1.5, -0.5), 0)
   }
 }
 
