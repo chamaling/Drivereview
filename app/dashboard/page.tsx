@@ -72,7 +72,7 @@ export default async function Page({
         <p>Space Analytics</p>
       </div>
 
-      <ScanButton />
+      <ScanButton rescan initOpen={false} />
     </div>
   )
 }

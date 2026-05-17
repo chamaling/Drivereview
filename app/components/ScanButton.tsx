@@ -47,8 +47,14 @@ const modifiedOptions = [
   "All files",
 ]
 
-export default function ScanButton() {
-  const [open, setOpen] = useState(true)
+export default function ScanButton({
+  initOpen = true,
+  rescan = false,
+}: {
+  initOpen?: boolean
+  rescan?: boolean
+}) {
+  const [open, setOpen] = useState(initOpen)
   const [rangeValue, setRangeValue] = useState(sliderValueToFileSize(0))
   const [modifiedValue, setModifiedValue] = useState("Last 30 days")
   const [fileTypeState, dispatchFileType] = useReducer(fileTypeReducer, {})
@@ -82,7 +88,9 @@ export default function ScanButton() {
   }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Button>Scan drive</Button>} />
+      <DialogTrigger
+        render={<Button>{rescan ? "Rescan drive" : "Scan drive"}</Button>}
+      />
       <DialogContent className="sm:max-w-sm">
         <DialogHeader>
           <DialogTitle>Filter your Drive</DialogTitle>
