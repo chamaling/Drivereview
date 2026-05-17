@@ -10,7 +10,7 @@ export const scanDriveAction = authClient
       try {
         const oauthClient = ctx.oauthClient
 
-        await getDriveFiles(oauthClient, clientFilters)
+        return await getDriveFiles(oauthClient, clientFilters)
       } catch (error) {
         console.error("Error scanning drive:", error)
         throw new ActionError("Failed to scan drive. Please try again.")
