@@ -67,7 +67,7 @@ export default async function Page({
   const scanResult = await scanDriveAction(userFilters)
   return (
     <div className="flex h-screen flex-col items-center justify-center">
-      <div className="flex items-center justify-start">
+      <div className="flex w-full items-center justify-around">
         <p>File Table</p>
         <p>Space Analytics</p>
       </div>
