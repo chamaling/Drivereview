@@ -37,9 +37,28 @@ export async function getDriveFiles(
     rating: ratingManager.getRating(file),
   }))
 
-  const filesSortedByRating = filesWithRatings.sort(
-    (a, b) => (a.rating || 0) - (b.rating || 0)
-  )
+  const potentialClutter = []
+  const lowPriority = []
+  const needsReview = []
 
-  return files
+  for (const file of filesWithRatings) {
+    if (!file.rating || file.rating >= 0.8) {
+      needsReview.push(file)
+    } else if (file.rating < 0.8 && file.rating >= 0.5) {
+      lowPriority.push(file)
+    } else {
+      potentialClutter.push(file)
+    }
+  }
+
+  potentialClutter.sort((a, b) => (b.rating || 0) - (a.rating || 0))
+  lowPriority.sort((a, b) => (b.rating || 0) - (a.rating || 0))
+  needsReview.sort((a, b) => (b.rating || 0) - (a.rating || 0))
+
+  return {
+    potentialClutter,
+    lowPriority,
+    needsReview,
+    all: filesWithRatings,
+  }
 }
