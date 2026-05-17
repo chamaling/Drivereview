@@ -9,6 +9,7 @@ import {
 import ScanButton from "../components/ScanButton"
 import * as z from "zod"
 import { scanDriveAction } from "../actions/scanDriveAction"
+import { Scan } from "@phosphor-icons/react"
 
 const searchParamsSchema = z.union([
   z
@@ -64,5 +65,14 @@ export default async function Page({
     )
   }
   const scanResult = await scanDriveAction(userFilters)
-  return <p>Testing</p>
+  return (
+    <div className="flex h-screen flex-col items-center justify-center">
+      <div className="flex items-center justify-start">
+        <p>File Table</p>
+        <p>Space Analytics</p>
+      </div>
+
+      <ScanButton />
+    </div>
+  )
 }
