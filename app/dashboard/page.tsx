@@ -9,7 +9,7 @@ import {
 import ScanButton from "../components/ScanButton"
 import * as z from "zod"
 import { scanDriveAction } from "../actions/scanDriveAction"
-import { Scan } from "@phosphor-icons/react"
+import SpaceAnalytics from "../components/SpaceAnalytics"
 
 const searchParamsSchema = z.union([
   z
@@ -65,8 +65,9 @@ export default async function Page({
     )
   }
   const scanResult = await scanDriveAction(userFilters)
+  const data = scanResult.data
 
-  if (!scanResult.data) {
+  if (!data) {
     throw new Error(
       "Failed to scan drive with provided filters. Please go back and try again."
     )
@@ -76,7 +77,7 @@ export default async function Page({
     <div className="flex h-screen flex-col items-center justify-center">
       <div className="flex w-full items-center justify-around">
         <p>File Table</p>
-        <p>Space Analytics</p>
+        <SpaceAnalytics data={data} />
       </div>
 
       <ScanButton rescan initOpen={false} />
