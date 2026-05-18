@@ -65,6 +65,13 @@ export default async function Page({
     )
   }
   const scanResult = await scanDriveAction(userFilters)
+
+  if (!scanResult.data) {
+    throw new Error(
+      "Failed to scan drive with provided filters. Please go back and try again."
+    )
+  }
+
   return (
     <div className="flex h-screen flex-col items-center justify-center">
       <div className="flex w-full items-center justify-around">
