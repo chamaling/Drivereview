@@ -24,13 +24,13 @@ const chartConfig = {
     label: "Needs Review",
     color: "var(--chart-3)",
   },
-  firstDist: {
+  first_dist: {
     color: "blue",
   },
-  secondDist: {
+  second_dist: {
     color: "green",
   },
-  thirdDist: {
+  third_dist: {
     color: "purple",
   },
 } satisfies ChartConfig
@@ -82,6 +82,21 @@ export default function SpaceAnalytics({
       name: "potential_clutter",
       value: parseFloat(clutterSizePercent),
       fill: chartConfig.potential_clutter.color,
+    },
+  ]
+
+  const chartDistData = [
+    {
+      name: "first_dist",
+      fill: chartConfig.first_dist.color,
+    },
+    {
+      name: "second_dist",
+      fill: chartConfig.second_dist.color,
+    },
+    {
+      name: "third_dist",
+      fill: chartConfig.third_dist.color,
     },
   ]
 

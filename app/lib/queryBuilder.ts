@@ -1,5 +1,6 @@
 import "server-only"
 import { GlobalFilters } from "./serverFilters"
+import { convertFileTypeToMimeType } from "./fileHelper"
 
 function convertLastModifiedStringtoUTCTimestamp(
   lastModified: GlobalFilters["last-modified"]
@@ -19,24 +20,6 @@ function convertLastModifiedStringtoUTCTimestamp(
   return now.toISOString()
 }
 
-function convertFileTypeToMimeType(
-  fileType: keyof GlobalFilters["file-types"]
-): string {
-  switch (fileType) {
-    case "Docs":
-      return "'application/vnd.google-apps.document'"
-    case "Sheets":
-      return "'application/vnd.google-apps.spreadsheet'"
-    case "Slides":
-      return "'application/vnd.google-apps.presentation'"
-    case "Image":
-      return "'image/*'"
-    case "PDF":
-      return "'application/pdf'"
-    case "Video":
-      return "'video/*'"
-  }
-}
 function convertFileTypesArrayToQueryString(
   fileTypes: GlobalFilters["file-types"]
 ): string {
