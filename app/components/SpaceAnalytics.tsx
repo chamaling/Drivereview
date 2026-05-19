@@ -9,6 +9,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+import { formatFileSize } from "@/app/lib/fileHelper"
+
 const chartConfig = {
   potential_clutter: {
     label: "Potential Clutter",
@@ -41,27 +43,44 @@ export default function SpaceAnalytics({
   const reviewLength = data.needsReview.length
   const clutterLength = data.potentialClutter.length
   const total = lowLength + reviewLength + clutterLength
+
   if (total === 0) {
     return <p>No data to display.</p>
   }
-  const lowPercent = ((lowLength / total) * 100).toFixed(2)
-  const reviewPercent = ((reviewLength / total) * 100).toFixed(2)
-  const clutterPercent = ((clutterLength / total) * 100).toFixed(2)
+
+  const lowSize = data.lowPriority.reduce(
+    (acc, file) => (file.size ? acc + parseInt(file.size, 10) : acc),
+    0
+  )
+  const reviewSize = data.needsReview.reduce(
+    (acc, file) => (file.size ? acc + parseInt(file.size, 10) : acc),
+    0
+  )
+  const clutterSize = data.potentialClutter.reduce(
+    (acc, file) => (file.size ? acc + parseInt(file.size, 10) : acc),
+    0
+  )
+
+  const totalSize = lowSize + reviewSize + clutterSize
+
+  const lowSizePercent = ((lowSize / totalSize) * 100).toFixed(2)
+  const reviewSizePercent = ((reviewSize / totalSize) * 100).toFixed(2)
+  const clutterSizePercent = ((clutterSize / totalSize) * 100).toFixed(2)
 
   const chartData = [
     {
       name: "low_priority",
-      value: parseFloat(lowPercent),
+      value: parseFloat(lowSizePercent),
       fill: chartConfig.low_priority.color,
     },
     {
       name: "needs_review",
-      value: parseFloat(reviewPercent),
+      value: parseFloat(reviewSizePercent),
       fill: chartConfig.needs_review.color,
     },
     {
       name: "potential_clutter",
-      value: parseFloat(clutterPercent),
+      value: parseFloat(clutterSizePercent),
       fill: chartConfig.potential_clutter.color,
     },
   ]
@@ -69,7 +88,7 @@ export default function SpaceAnalytics({
   return (
     <div className="flex h-full flex-col items-center justify-center">
       <h3>Likely Space to Save</h3>
-      <ChartContainer config={chartConfig} className="h-64 w-full">
+      <ChartContainer config={chartConfig} className="relative h-64 w-full">
         <PieChart responsive accessibilityLayer>
           <Pie
             data={chartData}
@@ -79,10 +98,16 @@ export default function SpaceAnalytics({
             cornerRadius={4}
             paddingAngle={3}
             innerRadius="60%"
+            animationBegin={0}
+            animationDuration={800}
           />
-          <ChartTooltip content={<ChartTooltipContent />} />
           <ChartLegend className="flex-col" content={<ChartLegendContent />} />
         </PieChart>
+        <div className="absolute inset-0 bottom-1/3 flex items-center justify-center">
+          <span className="text-base font-bold">
+            {formatFileSize(totalSize)}
+          </span>
+        </div>
       </ChartContainer>
     </div>
   )
