@@ -165,7 +165,10 @@ export default function SpaceAnalytics({
             animationBegin={0}
             animationDuration={800}
           />
-          <ChartLegend className="flex-col" content={<ChartLegendContent />} />
+          <ChartLegend
+            className="flex-col items-center"
+            content={<ChartLegendContent />}
+          />
         </PieChart>
 
         <div className="absolute inset-0 bottom-1/3 flex flex-col items-center justify-center">
