@@ -1,5 +1,8 @@
 "use client"
-import { scanDriveAction } from "../actions/scanDriveAction"
+import {
+  scanDriveAction,
+  type drivePriorityMap,
+} from "../actions/scanDriveAction"
 import { ChartContainer } from "@/components/ui/chart"
 import { PieChart, Pie } from "recharts"
 import {
@@ -10,12 +13,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 import { formatFileSize, convertMimeTypeToFileType } from "@/app/lib/fileHelper"
-
-export default function SpaceAnalytics({
-  data,
-}: {
-  data: NonNullable<Awaited<ReturnType<typeof scanDriveAction>>["data"]>
-}) {
+export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
   const lowLength = data.lowPriority.length
   const reviewLength = data.needsReview.length
   const clutterLength = data.potentialClutter.length

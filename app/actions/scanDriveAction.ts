@@ -3,6 +3,7 @@ import { authClient } from "@/lib/authClient"
 import { getDriveFiles } from "@/app/lib/driveAccessor"
 import { clientFiltersSchema } from "../schemas/filterSchema"
 import ActionError from "@/classes/ActionError"
+import { type ClassValue } from "clsx"
 export const scanDriveAction = authClient
   .inputSchema(clientFiltersSchema)
   .action(
@@ -20,3 +21,9 @@ export const scanDriveAction = authClient
       throwServerError: true,
     }
   )
+
+export type drivePriorityMap = NonNullable<
+  Awaited<ReturnType<typeof scanDriveAction>>["data"]
+>
+
+export type driveFile = drivePriorityMap["all"][number]
