@@ -32,9 +32,11 @@ export async function getDriveFiles(
   files = files.filter((file) => !("contentRestrictions" in file))
 
   // add rating to each file
+  type fileGroups = "Needs Review" | "Low Priority" | "Potential Clutter"
   const filesWithRatings = files.map((file) => ({
     ...file,
     rating: ratingManager.getRating(file),
+    group: "Needs Review" as fileGroups,
   }))
 
   const potentialClutter = []
@@ -46,8 +48,10 @@ export async function getDriveFiles(
       needsReview.push(file)
     } else if (file.rating < 0.8 && file.rating >= 0.5) {
       lowPriority.push(file)
+      file["group"] = "Low Priority"
     } else {
       potentialClutter.push(file)
+      file["group"] = "Potential Clutter"
     }
   }
 
