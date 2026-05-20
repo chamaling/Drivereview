@@ -2,10 +2,11 @@
  * so the user feels they have good control
  */
 export function sliderValueToFileSize(sliderValue: number): number {
-  const minFileSize = 1e6 // 1 MB
+  const minFileSize = 1e5 // 0.1 MB
   const maxFileSize = 1e11 // 100 GB
 
-  const logMin = Math.log10(minFileSize) - 1 // extend the range a bit for better UX
+  const logMin = Math.log10(minFileSize) - 0.5 // extend the range a bit for better UX
+
   const logMax = Math.log10(maxFileSize)
 
   const logValue = logMin + (logMax - logMin) * (sliderValue / 100)
@@ -29,6 +30,10 @@ export function snapFileSize(bytes: number): number {
     return Math.round(bytes / 1e7) * 1e7
   }
 
-  // snap to nearest 1 MB
-  return Math.round(bytes / 1e6) * 1e6
+  if (bytes >= 1e6) {
+    // snap to nearest 1 MB
+    return Math.round(bytes / 1e6) * 1e6
+  }
+  // snap to nearest 0.1 MB
+  return Math.round(bytes / 1e5) * 1e5
 }
