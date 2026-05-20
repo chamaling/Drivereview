@@ -6,12 +6,15 @@ import {
   getSortedRowModel,
   getPaginationRowModel,
   flexRender,
+  Updater,
+  RowSelectionState,
 } from "@tanstack/react-table"
 import { driveFile } from "@/app/actions/scanDriveAction"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { useState, useMemo } from "react"
+
 export default function DriveTable({ data }: { data: driveFile[] }) {
   const [rowSelection, setRowSelection] = useState({})
   const [tab, setTab] = useState<driveFile["group"]>("Potential Clutter")
@@ -20,36 +23,33 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
     return data.filter((file) => file.group === tab)
   }, [data, tab])
 
+  const handleRowSelectionChange = (updater: Updater<RowSelectionState>) => {
+    const newRowSelection =
+      typeof updater === "function" ? updater(rowSelection) : updater
+    if (Object.keys(newRowSelection).length <= 10) {
+      setRowSelection(newRowSelection)
+    }
+  }
+
   const table = useReactTable({
     data: filteredData,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    onRowSelectionChange: setRowSelection,
+    onRowSelectionChange: handleRowSelectionChange,
     state: { rowSelection },
   })
 
   return (
     <div className="flex flex-col items-start">
-      <div className="flex w-full justify-start">
-        <Tabs value={tab} className="w-[400px]" onValueChange={setTab}>
-          <TabsList>
-            <TabsTrigger value="Potential Clutter">
-              Potential Clutter
-            </TabsTrigger>
-            <TabsTrigger value="Low Priority">Low Priority</TabsTrigger>
-            <TabsTrigger value="Needs Review">Needs Review</TabsTrigger>
-          </TabsList>
-        </Tabs>
-        <Button
-          variant="ghost"
-          className="ml-auto text-muted-foreground"
-          onClick={() => table.toggleAllRowsSelected()}
-        >
-          Select All
-        </Button>
-      </div>
+      <Tabs value={tab} className="w-[400px]" onValueChange={setTab}>
+        <TabsList>
+          <TabsTrigger value="Potential Clutter">Potential Clutter</TabsTrigger>
+          <TabsTrigger value="Low Priority">Low Priority</TabsTrigger>
+          <TabsTrigger value="Needs Review">Needs Review</TabsTrigger>
+        </TabsList>
+      </Tabs>
       <Table>
         <TableBody>
           {table.getRowModel().rows.map((row) => (
