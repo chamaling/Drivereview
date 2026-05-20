@@ -5,7 +5,7 @@ export function sliderValueToFileSize(sliderValue: number): number {
   const minFileSize = 1e6 // 1 MB
   const maxFileSize = 1e11 // 100 GB
 
-  const logMin = Math.log10(minFileSize)
+  const logMin = Math.log10(minFileSize) - 1 // extend the range a bit for better UX
   const logMax = Math.log10(maxFileSize)
 
   const logValue = logMin + (logMax - logMin) * (sliderValue / 100)
