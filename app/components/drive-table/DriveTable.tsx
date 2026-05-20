@@ -27,13 +27,24 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
 
   return (
     <div className="flex flex-col items-start">
-      <Tabs defaultValue="" className="w-[400px]">
-        <TabsList>
-          <TabsTrigger value="Potential Clutter">Potential Clutter</TabsTrigger>
-          <TabsTrigger value="Low Priority">Low Priority</TabsTrigger>
-          <TabsTrigger value="Needs Review">Needs Review</TabsTrigger>
-        </TabsList>
-      </Tabs>
+      <div className="flex w-full justify-start">
+        <Tabs defaultValue="" className="w-[400px]">
+          <TabsList>
+            <TabsTrigger value="Potential Clutter">
+              Potential Clutter
+            </TabsTrigger>
+            <TabsTrigger value="Low Priority">Low Priority</TabsTrigger>
+            <TabsTrigger value="Needs Review">Needs Review</TabsTrigger>
+          </TabsList>
+        </Tabs>
+        <Button
+          variant="ghost"
+          className="ml-auto text-muted-foreground"
+          onClick={() => table.toggleAllRowsSelected()}
+        >
+          Select All
+        </Button>
+      </div>
       <Table>
         <TableBody>
           {table.getRowModel().rows.map((row) => (
@@ -51,7 +62,11 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
         </TableBody>
       </Table>
       <div className="mt-2 flex w-full items-center justify-end space-x-2">
-        <div className="flex-1 flex-col text-sm text-muted-foreground">
+        <div className="flex flex-col items-center gap-y-2 text-sm text-muted-foreground *:inline-block">
+          <span>
+            {table.getFilteredSelectedRowModel().rows.length} of{" "}
+            {table.getFilteredRowModel().rows.length} selected..
+          </span>
           <span>
             Page {table.getState().pagination.pageIndex + 1} of{" "}
             {table.getPageCount()}
