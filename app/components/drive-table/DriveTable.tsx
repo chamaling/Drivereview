@@ -11,15 +11,20 @@ import { driveFile } from "@/app/actions/scanDriveAction"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-
+import { useState } from "react"
 export default function DriveTable({ data }: { data: driveFile[] }) {
+  const [rowSelection, setRowSelection] = useState({})
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onRowSelectionChange: setRowSelection,
+    state: { rowSelection },
   })
+
   return (
     <div className="flex flex-col items-start">
       <Tabs defaultValue="" className="w-[400px]">
@@ -32,7 +37,10 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
       <Table>
         <TableBody>
           {table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id}>
+            <TableRow
+              key={row.id}
+              className={row.getIsSelected() ? "bg-accent" : ""}
+            >
               {row.getVisibleCells().map((cell) => (
                 <TableCell key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
