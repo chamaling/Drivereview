@@ -44,8 +44,13 @@ export default async function Page({
   const userFilters = parsedSearchParams.data as Parameters<
     typeof scanDriveAction
   >[0]
+  const scanResult =
+    Object.keys(userFilters).length > 0
+      ? await scanDriveAction(userFilters)
+      : null
+  const data = scanResult ? scanResult.data : null
 
-  if (Object.keys(userFilters).length === 0) {
+  if (!data || data.all.length === 0) {
     return (
       <div className="flex h-screen flex-col items-center justify-center">
         <div className="my-auto flex flex-col items-center justify-center">
@@ -65,8 +70,6 @@ export default async function Page({
       </div>
     )
   }
-  const scanResult = await scanDriveAction(userFilters)
-  const data = scanResult.data
 
   if (!data) {
     throw new Error(
