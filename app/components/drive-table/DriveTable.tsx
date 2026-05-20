@@ -60,12 +60,14 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
         <Button
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
+          variant="secondary"
         >
           Previous
         </Button>
         <Button
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
+          variant="secondary"
         >
           Next
         </Button>
