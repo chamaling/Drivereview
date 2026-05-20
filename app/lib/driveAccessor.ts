@@ -29,7 +29,14 @@ export async function getDriveFiles(
   )
 
   // user likely shouldn't trash files with content restrictions, so filter them
-  files = files.filter((file) => !("contentRestrictions" in file))
+  // also filter out files smaller than the minimum file size filter
+  files = files.filter(
+    (file) =>
+      !("contentRestrictions" in file) &&
+      (file.size
+        ? parseInt(file.size) > clientFilters["minimum-file-size"]
+        : true)
+  )
 
   // add rating to each file
   type fileGroups = "Needs Review" | "Low Priority" | "Potential Clutter"
