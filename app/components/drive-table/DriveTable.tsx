@@ -43,6 +43,12 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
         </TableBody>
       </Table>
       <div className="mt-2 flex w-full items-center justify-end space-x-2">
+        <div className="flex-1 flex-col text-sm text-muted-foreground">
+          <span>
+            Page {table.getState().pagination.pageIndex + 1} of{" "}
+            {table.getPageCount()}
+          </span>
+        </div>
         <Button
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
