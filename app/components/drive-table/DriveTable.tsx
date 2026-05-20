@@ -19,7 +19,7 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
     getPaginationRowModel: getPaginationRowModel(),
   })
   return (
-    <>
+    <div className="flex flex-col items-start">
       <Tabs defaultValue="" className="w-[400px]">
         <TabsList>
           <TabsTrigger value="Potential Clutter">Potential Clutter</TabsTrigger>
@@ -40,6 +40,6 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
           ))}
         </TableBody>
       </Table>
-    </>
+    </div>
   )
 }
