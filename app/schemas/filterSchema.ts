@@ -18,7 +18,7 @@ export const lastModifiedEnum = z.enum([
 export const clientFiltersSchema = z.object({
   "minimum-file-size": z
     .number("Minimum file size must be a number.")
-    .min(1, "Minimum file size must be at least 1 byte.")
+    .min(0, "Minimum file size must be at least 0 bytes.")
     .max(
       100 * 1024 * 1024 * 1024,
       "Maximum file size must be less than 100 GB."

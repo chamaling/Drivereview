@@ -65,7 +65,7 @@ export default async function Page({
               </EmptyDescription>
             </EmptyHeader>
           </Empty>
-          <ScanButton />
+          <ScanButton initOpen={data ? false : true} />
         </div>
       </div>
     )

@@ -48,7 +48,7 @@ const modifiedOptions = [
 ]
 
 export default function ScanButton({
-  initOpen = true,
+  initOpen = false,
   rescan = false,
 }: {
   initOpen?: boolean
