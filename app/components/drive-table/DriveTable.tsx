@@ -26,6 +26,12 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
   const handleRowSelectionChange = (updater: Updater<RowSelectionState>) => {
     const newRowSelection =
       typeof updater === "function" ? updater(rowSelection) : updater
+    /*
+     * Limiting row selection to 10 is
+     * precisely because users selecting a large amount of files
+     * are more susceptible to deleting more than intended,
+     * and it makes the review process smoother on the browser.
+     */
     if (Object.keys(newRowSelection).length <= 10) {
       setRowSelection(newRowSelection)
     }
