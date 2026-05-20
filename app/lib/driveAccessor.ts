@@ -44,9 +44,9 @@ export async function getDriveFiles(
   const needsReview = []
 
   for (const file of filesWithRatings) {
-    if (!file.rating || file.rating >= 0.8) {
+    if (!file.rating || file.rating >= 0.7) {
       needsReview.push(file)
-    } else if (file.rating < 0.8 && file.rating >= 0.5) {
+    } else if (file.rating < 0.7 && file.rating >= 0.5) {
       lowPriority.push(file)
       file["group"] = "Low Priority"
     } else {
