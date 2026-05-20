@@ -61,8 +61,8 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
           ))}
         </TableBody>
       </Table>
-      <div className="mt-2 flex w-full items-center justify-end space-x-2">
-        <div className="flex flex-col items-center gap-y-2 text-sm text-muted-foreground *:inline-block">
+      <div className="mt-8 flex w-full items-center justify-end space-x-12">
+        <div className="flex flex-col items-center gap-y-2 text-sm text-muted-foreground">
           <span>
             {table.getFilteredSelectedRowModel().rows.length} of{" "}
             {table.getFilteredRowModel().rows.length} selected..
@@ -72,20 +72,22 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
             {table.getPageCount()}
           </span>
         </div>
-        <Button
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-          variant="secondary"
-        >
-          Previous
-        </Button>
-        <Button
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-          variant="secondary"
-        >
-          Next
-        </Button>
+        <div className="flex space-x-4 *:inline-block">
+          <Button
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+            variant="secondary"
+          >
+            Previous
+          </Button>
+          <Button
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+            variant="secondary"
+          >
+            Next
+          </Button>
+        </div>
       </div>
     </div>
   )
