@@ -11,12 +11,17 @@ import { driveFile } from "@/app/actions/scanDriveAction"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { useState } from "react"
+import { useState, useMemo } from "react"
 export default function DriveTable({ data }: { data: driveFile[] }) {
   const [rowSelection, setRowSelection] = useState({})
+  const [tab, setTab] = useState<driveFile["group"]>("Potential Clutter")
+
+  const filteredData = useMemo(() => {
+    return data.filter((file) => file.group === tab)
+  }, [data, tab])
 
   const table = useReactTable({
-    data,
+    data: filteredData,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -28,7 +33,7 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
   return (
     <div className="flex flex-col items-start">
       <div className="flex w-full justify-start">
-        <Tabs defaultValue="" className="w-[400px]">
+        <Tabs value={tab} className="w-[400px]" onValueChange={setTab}>
           <TabsList>
             <TabsTrigger value="Potential Clutter">
               Potential Clutter
