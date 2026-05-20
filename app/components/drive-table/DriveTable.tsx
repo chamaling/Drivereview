@@ -15,6 +15,11 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { useState, useMemo } from "react"
 
+const openFilesForReview = (files: driveFile[]) => {
+  files.forEach((file) => {
+    window.open(`https://drive.google.com/file/d/${file.id}/view`, "_blank")
+  })
+}
 export default function DriveTable({ data }: { data: driveFile[] }) {
   const [rowSelection, setRowSelection] = useState({})
   const [tab, setTab] = useState<driveFile["group"]>("Potential Clutter")
@@ -73,6 +78,18 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
         </TableBody>
       </Table>
       <div className="mt-8 flex w-full items-center justify-end space-x-12">
+        <Button
+          disabled={table.getFilteredSelectedRowModel().rows.length === 0}
+          onClick={() =>
+            openFilesForReview(
+              table
+                .getFilteredSelectedRowModel()
+                .rows.map((row) => row.original)
+            )
+          }
+        >
+          Open for Review
+        </Button>
         <div className="flex flex-col items-center gap-y-2 text-sm text-muted-foreground">
           <span>
             {table.getFilteredSelectedRowModel().rows.length} of{" "}
