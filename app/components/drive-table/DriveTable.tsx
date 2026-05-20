@@ -8,8 +8,9 @@ import {
   flexRender,
 } from "@tanstack/react-table"
 import { driveFile } from "@/app/actions/scanDriveAction"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
+import { Button } from "@/components/ui/button"
 
 export default function DriveTable({ data }: { data: driveFile[] }) {
   const table = useReactTable({
@@ -41,6 +42,20 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
           ))}
         </TableBody>
       </Table>
+      <div className="mt-2 flex w-full items-center justify-end space-x-2">
+        <Button
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Previous
+        </Button>
+        <Button
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   )
 }
