@@ -10,6 +10,7 @@ import ScanButton from "../components/ScanButton"
 import * as z from "zod"
 import { scanDriveAction } from "../actions/scanDriveAction"
 import SpaceAnalytics from "../components/SpaceAnalytics"
+import DriveTable from "../components/drive-table/DriveTable"
 
 const searchParamsSchema = z.union([
   z
@@ -76,7 +77,7 @@ export default async function Page({
   return (
     <div className="flex h-screen flex-col items-center justify-center">
       <div className="flex w-full items-center justify-around">
-        <p>File Table</p>
+        <DriveTable data={data.all} />
         <SpaceAnalytics data={data} />
       </div>
 
