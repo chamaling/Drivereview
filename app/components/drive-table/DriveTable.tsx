@@ -10,6 +10,7 @@ import {
 import { driveFile } from "@/app/actions/scanDriveAction"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
+
 export default function DriveTable({ data }: { data: driveFile[] }) {
   const table = useReactTable({
     data,
