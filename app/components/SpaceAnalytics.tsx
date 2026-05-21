@@ -132,7 +132,7 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
 
   return (
     <div className="flex h-full flex-col items-center justify-center">
-      <h3>Likely Space to Save</h3>
+      <h3>Distribution by Ranking</h3>
       <ChartContainer config={chartConfig} className="relative h-64 w-full">
         <PieChart responsive accessibilityLayer>
           <Pie
@@ -172,7 +172,7 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
           </span>
         </div>
       </ChartContainer>
-      <h3 className="mt-8">File Space Distribution</h3>
+      <h3 className="mt-8">Distribution by File Type</h3>
       <ChartContainer config={chartConfig} className="relative h-64 w-full">
         <PieChart responsive accessibilityLayer>
           <Pie

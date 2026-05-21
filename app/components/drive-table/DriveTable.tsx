@@ -54,13 +54,29 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
 
   return (
     <div className="flex flex-col items-start">
-      <Tabs value={tab} className="w-[400px]" onValueChange={setTab}>
-        <TabsList className="mb-4 h-16 justify-start border-b-2 bg-transparent">
-          <TabsTrigger value="Potential Clutter">Potential Clutter</TabsTrigger>
-          <TabsTrigger value="Low Priority">Low Priority</TabsTrigger>
-          <TabsTrigger value="Needs Review">Needs Review</TabsTrigger>
-        </TabsList>
-      </Tabs>
+      <div className="flex w-full items-center justify-end">
+        <Tabs value={tab} className="w-[400px]" onValueChange={setTab}>
+          <TabsList className="mb-4 h-16 justify-start border-b-2 bg-transparent">
+            <TabsTrigger value="Potential Clutter">
+              Potential Clutter
+            </TabsTrigger>
+            <TabsTrigger value="Low Priority">Low Priority</TabsTrigger>
+            <TabsTrigger value="Needs Review">Needs Review</TabsTrigger>
+          </TabsList>
+        </Tabs>
+        <Button
+          disabled={table.getFilteredSelectedRowModel().rows.length === 0}
+          onClick={() =>
+            openFilesForReview(
+              table
+                .getFilteredSelectedRowModel()
+                .rows.map((row) => row.original)
+            )
+          }
+        >
+          Open for Review
+        </Button>
+      </div>
       <Table>
         <TableBody>
           {table.getRowModel().rows.map((row) => (
@@ -78,18 +94,6 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
         </TableBody>
       </Table>
       <div className="mt-8 flex w-full items-center justify-end space-x-12">
-        <Button
-          disabled={table.getFilteredSelectedRowModel().rows.length === 0}
-          onClick={() =>
-            openFilesForReview(
-              table
-                .getFilteredSelectedRowModel()
-                .rows.map((row) => row.original)
-            )
-          }
-        >
-          Open for Review
-        </Button>
         <div className="flex flex-col items-center gap-y-2 text-sm text-muted-foreground">
           <span>
             {table.getFilteredSelectedRowModel().rows.length} of{" "}
