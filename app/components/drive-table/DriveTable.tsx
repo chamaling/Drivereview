@@ -93,7 +93,8 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
           ))}
         </TableBody>
       </Table>
-      <div className="mt-8 flex w-full items-center justify-end space-x-12">
+      <div className="mt-8 grid w-full grid-cols-3 items-center justify-end space-x-12">
+        <div />
         <div className="flex flex-col items-center gap-y-2 text-sm text-muted-foreground">
           <span>
             {table.getFilteredSelectedRowModel().rows.length} of{" "}
