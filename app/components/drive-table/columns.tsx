@@ -60,7 +60,7 @@ export const columns: ColumnDef<driveFile>[] = [
     cell: ({ row }) => {
       const rating = row.original.rating
       return (
-        <span className={convertRatingToTailwindColor(rating)}>
+        <span className={`${convertRatingToTailwindColor(rating)} font-bold`}>
           {convertRatingToTextHundredths(rating)}
         </span>
       )

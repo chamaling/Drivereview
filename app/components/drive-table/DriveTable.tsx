@@ -55,7 +55,7 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
   return (
     <div className="flex flex-col items-start">
       <Tabs value={tab} className="w-[400px]" onValueChange={setTab}>
-        <TabsList>
+        <TabsList className="mb-4 h-16 justify-start border-b-2 bg-transparent">
           <TabsTrigger value="Potential Clutter">Potential Clutter</TabsTrigger>
           <TabsTrigger value="Low Priority">Low Priority</TabsTrigger>
           <TabsTrigger value="Needs Review">Needs Review</TabsTrigger>
