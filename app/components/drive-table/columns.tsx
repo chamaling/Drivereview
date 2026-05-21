@@ -10,6 +10,17 @@ function convertRatingToTextHundredths(rating: number) {
   return `${percentage}/100`
 }
 
+function convertRatingToTailwindColor(rating: number) {
+  if (rating >= 0.8) {
+    return "text-green-600"
+  } else if (rating >= 0.6) {
+    return "text-yellow-600"
+  } else if (rating >= 0.4) {
+    return "text-orange-600"
+  } else {
+    return "text-red-600"
+  }
+}
 const fileTypeToIconMap: Record<string, string> = {
   Docs: "/google-docs.svg",
   Sheets: "/google-sheets.svg",
@@ -45,7 +56,15 @@ export const columns: ColumnDef<driveFile>[] = [
   },
   {
     accessorKey: "rating",
-    accessorFn: (file) => convertRatingToTextHundredths(file.rating),
+
+    cell: ({ row }) => {
+      const rating = row.original.rating
+      return (
+        <span className={convertRatingToTailwindColor(rating)}>
+          {convertRatingToTextHundredths(rating)}
+        </span>
+      )
+    },
   },
   {
     id: "select",
