@@ -29,7 +29,7 @@ export default function FileTypeButton({
       render={(props) => (
         <Button
           {...props}
-          className="flex size-16 flex-col items-center justify-center min-[420px]:size-24 data-checked:bg-primary! data-checked:text-primary-foreground"
+          className="flex size-16 flex-col items-center justify-center min-[420px]:size-24 data-checked:bg-primary! data-checked:text-primary-foreground data-checked:hover:text-primary-foreground/90"
           variant="outline"
         >
           <div className="relative size-6 min-[420px]:size-8">
