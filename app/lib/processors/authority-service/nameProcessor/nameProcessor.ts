@@ -50,7 +50,7 @@ class NameProcessor extends Processor {
 The name of a file can be a strong indicator of authority, especially if it contains certain keywords,
 so it should have high weight and give higher scores to files with authoritative keywords in their names
 */
-const nameProcessor = new NameProcessor(0.5, [
+const nameProcessor = new NameProcessor(0.3, [
   fileSlice,
   financeSlice,
   healthSlice,
