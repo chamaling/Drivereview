@@ -1,16 +1,15 @@
 import RatingService from "./service"
 import createdTimeProcessor from "../processors/authority-service/createdTimeProcessor"
 import modifiedTimeProcessor from "../processors/authority-service/modifiedTimeProcessor"
-import starredProcessor from "../processors/authority-service/starredProcessor"
 import mimeTypeProcessor from "../processors/authority-service/mimeTypeProcessor"
 import nameProcessor from "../processors/authority-service/nameProcessor/nameProcessor"
-
-const authorityService = new RatingService(0.8, [
+import sizeProcessor from "../processors/authority-service/sizeProcessor"
+const authorityService = new RatingService(0.7, [
   createdTimeProcessor,
   modifiedTimeProcessor,
-  starredProcessor,
   mimeTypeProcessor,
   nameProcessor,
+  sizeProcessor,
 ])
 
 export default authorityService

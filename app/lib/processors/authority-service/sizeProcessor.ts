@@ -24,11 +24,11 @@ class SizeProcessor extends Processor {
 }
 
 /*
-The file size as a general metric is robust in
+The file size as a general metric is decent in
 identifying if a file is worth to delete,
 as users are more likely to delete large files than small files,
 so it should have a higher weight
 */
-const sizeProcessor = new SizeProcessor(0.5)
+const sizeProcessor = new SizeProcessor(0.1)
 
 export default sizeProcessor

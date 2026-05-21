@@ -1,10 +1,9 @@
 import authorityService from "./rating-services/authorityService"
 import recencyService from "./rating-services/recencyService"
-import generalService from "./rating-services/generalService"
 import { drive_v3 } from "googleapis"
 
 class RatingManager {
-  private services = [authorityService, recencyService, generalService]
+  private services = [authorityService, recencyService]
   public getRating(file: drive_v3.Schema$File): number {
     let totalRating = 0
     let totalWeight = 0
@@ -17,9 +16,15 @@ class RatingManager {
       let serviceName = "authorityService"
       if (service === recencyService) {
         serviceName = "recencyService"
-      } else if (service === generalService) {
-        serviceName = "generalService"
       }
+
+      if (file.trashed) {
+        totalRating -= 0.5
+      }
+      if (file.starred) {
+        totalRating += 0.5
+      }
+
       console.log(
         `Rating from ${serviceName} for file ${file.name}: ${rating} with weight ${service.getWeight()}`
       )
