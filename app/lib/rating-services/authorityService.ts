@@ -5,7 +5,7 @@ import starredProcessor from "../processors/authority-service/starredProcessor"
 import mimeTypeProcessor from "../processors/authority-service/mimeTypeProcessor"
 import nameProcessor from "../processors/authority-service/nameProcessor/nameProcessor"
 
-const authorityService = new RatingService(0.75, [
+const authorityService = new RatingService(0.8, [
   createdTimeProcessor,
   modifiedTimeProcessor,
   starredProcessor,
