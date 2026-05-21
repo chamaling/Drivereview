@@ -169,7 +169,7 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
             />
           </PieChart>
           <div className="absolute inset-0 bottom-1/6 flex items-center justify-center">
-            <span className="text-base font-bold">
+            <span className="text-md font-bold">
               {formatFileSize(totalSize)}
             </span>
           </div>
@@ -197,7 +197,7 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
           </PieChart>
 
           <div className="absolute inset-0 bottom-1/6 flex items-center justify-center">
-            <span className="text-base font-bold">
+            <span className="text-md font-bold">
               {formatFileSize(topThreeTotal)}
             </span>
           </div>
