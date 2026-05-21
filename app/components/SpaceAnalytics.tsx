@@ -134,7 +134,7 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
     <div className="flex w-full items-center justify-center">
       <div className="flex h-full flex-col items-center justify-center">
         <h3 className="text-sm">Distribution by Ranking</h3>
-        <ChartContainer config={chartConfig} className="relative h-55 w-full">
+        <ChartContainer config={chartConfig} className="relative h-40 w-full">
           <PieChart responsive accessibilityLayer>
             <Pie
               data={chartData}
@@ -143,7 +143,8 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
               strokeWidth={0}
               cornerRadius={4}
               paddingAngle={3}
-              innerRadius="60%"
+              innerRadius={35}
+              outerRadius={45}
               animationBegin={0}
               animationDuration={800}
             />
@@ -159,7 +160,7 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
 
                   return (
                     <ChartLegendContent
-                      className="flex-col"
+                      className="whitespace-nowrap"
                       payload={sortedPayload}
                     />
                   )
@@ -167,7 +168,7 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
               }
             />
           </PieChart>
-          <div className="absolute inset-0 bottom-2/5 flex items-center justify-center">
+          <div className="absolute inset-0 bottom-1/6 flex items-center justify-center">
             <span className="text-base font-bold">
               {formatFileSize(totalSize)}
             </span>
@@ -176,7 +177,7 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
       </div>
       <div className="flex h-full flex-col items-center justify-center">
         <h3 className="text-sm">Distribution by File Type</h3>
-        <ChartContainer config={chartConfig} className="relative h-55 w-full">
+        <ChartContainer config={chartConfig} className="relative h-40 w-full">
           <PieChart responsive accessibilityLayer>
             <Pie
               data={chartDistData}
@@ -185,17 +186,17 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
               strokeWidth={0}
               cornerRadius={4}
               paddingAngle={3}
-              innerRadius="60%"
+              innerRadius={35}
+              outerRadius={45}
               animationBegin={0}
               animationDuration={800}
             />
             <ChartLegend
-              className="flex-col"
-              content={<ChartLegendContent />}
+              content={<ChartLegendContent className="whitespace-nowrap" />}
             />
           </PieChart>
 
-          <div className="absolute inset-0 bottom-2/5 flex flex-col items-center justify-center">
+          <div className="absolute inset-0 bottom-1/6 flex items-center justify-center">
             <span className="text-base font-bold">
               {formatFileSize(topThreeTotal)}
             </span>
