@@ -3,7 +3,7 @@ import Script from "next/script"
 import { clientConfig } from "@/lib/config/client"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { useState } from "react"
 import { useAction } from "next-safe-action/hooks"
 import { authenticateUserAction } from "@/app/actions/authenticateUserAction"
@@ -30,6 +30,12 @@ export default function GoogleDriveButton() {
     },
   })
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    if (window.google) {
+      handleGoogleScriptLoad()
+    }
+  }, [])
 
   function handleGoogleScriptLoad() {
     codeClient.current = google.accounts.oauth2.initCodeClient({
