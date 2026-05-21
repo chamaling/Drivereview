@@ -13,6 +13,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 import { formatFileSize, convertMimeTypeToFileType } from "@/app/lib/fileHelper"
+const payloadOrder = ["potential_clutter", "low_priority", "needs_review"]
 export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
   const lowLength = data.lowPriority.length
   const reviewLength = data.needsReview.length
@@ -141,7 +142,25 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
             animationBegin={0}
             animationDuration={800}
           />
-          <ChartLegend className="flex-col" content={<ChartLegendContent />} />
+          <ChartLegend
+            content={
+              // sort by order if payload name is in ORDER array, otherwise put at the end
+              (props) => {
+                const sortedPayload = [...(props.payload ?? [])].sort(
+                  (a, b) =>
+                    payloadOrder.indexOf(a.value ?? "") -
+                    payloadOrder.indexOf(b.value ?? "")
+                )
+
+                return (
+                  <ChartLegendContent
+                    className="flex-col"
+                    payload={sortedPayload}
+                  />
+                )
+              }
+            }
+          />
         </PieChart>
         <div className="absolute inset-0 bottom-1/3 flex items-center justify-center">
           <span className="text-base font-bold">
@@ -163,10 +182,7 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
             animationBegin={0}
             animationDuration={800}
           />
-          <ChartLegend
-            className="flex-col items-center"
-            content={<ChartLegendContent />}
-          />
+          <ChartLegend className="flex-col" content={<ChartLegendContent />} />
         </PieChart>
 
         <div className="absolute inset-0 bottom-1/3 flex flex-col items-center justify-center">
