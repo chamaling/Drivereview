@@ -56,7 +56,7 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
     <div className="flex flex-col items-start">
       <div className="flex w-full items-center justify-end">
         <Tabs value={tab} className="w-[400px]" onValueChange={setTab}>
-          <TabsList className="mb-4 h-16 justify-start border-b-2 bg-transparent">
+          <TabsList>
             <TabsTrigger value="Potential Clutter">
               Potential Clutter
             </TabsTrigger>
@@ -93,9 +93,9 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
           ))}
         </TableBody>
       </Table>
-      <div className="mt-8 grid w-full grid-cols-3 items-center justify-end space-x-12">
+      <div className="justify-centerspace-x-12 grid w-full grid-cols-3 items-center">
         <div />
-        <div className="flex flex-col items-center gap-y-2 text-sm text-muted-foreground">
+        <div className="flex flex-col items-center text-sm text-muted-foreground">
           <span>
             {table.getFilteredSelectedRowModel().rows.length} of{" "}
             {table.getFilteredRowModel().rows.length} selected..
@@ -105,7 +105,7 @@ export default function DriveTable({ data }: { data: driveFile[] }) {
             {table.getPageCount()}
           </span>
         </div>
-        <div className="flex space-x-4 *:inline-block">
+        <div className="flex justify-end *:inline-block">
           <Button
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}

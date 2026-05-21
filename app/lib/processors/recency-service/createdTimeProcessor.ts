@@ -20,7 +20,7 @@ class CreatedTimeProcessor extends Processor {
       return 0
     }
 
-    return Math.min(ageInDays * -(1 / 14), -0.5) // Cap the score at -0.5 for files older than 14 days
+    return 1 / ageInDays ** (1 / 2)
   }
 }
 

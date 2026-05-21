@@ -19,7 +19,7 @@ class ModifiedTimeProcessor extends Processor {
       return 0
     }
 
-    return Math.min(ageInDays * -(1 / 30), -0.33) // Cap the score at -0.33 for files older than 30 days
+    return 1 / ageInDays ** (1 / 2)
   }
 }
 

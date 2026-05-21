@@ -92,7 +92,7 @@ export default function ScanButton({
         render={
           <Button
             variant={rescan ? "outline" : "default"}
-            className="px-3 py-2"
+            className="mb-4 px-3 py-2"
           >
             {rescan ? "Rescan drive" : "Scan drive"}
           </Button>
