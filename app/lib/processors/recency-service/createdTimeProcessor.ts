@@ -16,11 +16,7 @@ class CreatedTimeProcessor extends Processor {
     const currentTime = Date.now()
     const ageInDays = (currentTime - createdTime) / (1000 * 60 * 60 * 24)
 
-    if (ageInDays < 1) {
-      return 0
-    }
-
-    return 1 / ageInDays ** (1 / 2)
+    return Math.min(1 / ageInDays ** 2, 1)
   }
 }
 
@@ -29,6 +25,6 @@ The time a file was created
 is a strong indicator of recency,
 so it should have a higher weight compared to other factors 
 */
-const createdTimeProcessor = new CreatedTimeProcessor(0.5)
+const createdTimeProcessor = new CreatedTimeProcessor(0.6)
 
 export default createdTimeProcessor

@@ -33,7 +33,7 @@ class MimeTypeProcessor extends Processor {
 }
 
 /*
-The MIME type can prvoide some indicator of recency,
+The MIME type can provide some indicator of recency,
 as documents are much more likely to be edited than images or videos
 and needed 
 */

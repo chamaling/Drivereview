@@ -15,11 +15,7 @@ class ModifiedTimeProcessor extends Processor {
     const currentTime = Date.now()
     const ageInDays = (currentTime - modifiedTime) / (1000 * 60 * 60 * 24)
 
-    if (ageInDays < 1) {
-      return 0
-    }
-
-    return 1 / ageInDays ** (1 / 2)
+    return Math.min(1 / ageInDays ** 2, 1)
   }
 }
 
@@ -28,6 +24,6 @@ The time a file was last modified is a moderately strong indicator of recency,
 due to the fact that users modify files shortly after creating them, and it
 indicates activity, so it should have a moderate weight.
 */
-const modifiedTimeProcessor = new ModifiedTimeProcessor(0.33)
+const modifiedTimeProcessor = new ModifiedTimeProcessor(0.4)
 
 export default modifiedTimeProcessor

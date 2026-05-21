@@ -16,7 +16,7 @@ class SizeProcessor extends Processor {
 
     // Larger files are more efficient to delete, so they should lower the score
     if (sizeInMB > 100) {
-      return -0.5
+      return -1
     }
 
     return 0

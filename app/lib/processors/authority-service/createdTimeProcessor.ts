@@ -21,7 +21,7 @@ class CreatedTimeProcessor extends Processor {
     }
 
     // older files are more likely to be needed so subtract from them the least
-    return Math.min(Math.max(-1 / ageInDays ** 1.5 / 2, -0.5), 0)
+    return Math.min(-Math.log10(ageInDays) + 2, 0)
   }
 }
 

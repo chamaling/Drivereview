@@ -31,12 +31,12 @@ class ModifiedTimeProcessor extends Processor {
       return -0.5 // this indicates that modification and creation are close, so lower authority as it may be temporary
     }
 
-    return Math.max(Math.max(-1 / creationModificationElapse ** 1.5, -0.5), 0)
+    return Math.min(-Math.log10(creationModificationElapse) + 2, 0)
   }
 }
 
 /*
-The time a file was last modifeid is a moderate indicator of authority,
+The time a file was last modified is a moderate indicator of authority,
 so it should have a moderate weight
 */
 const modifiedTimeProcessor = new ModifiedTimeProcessor(0.2)

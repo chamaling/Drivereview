@@ -10,7 +10,7 @@ class TrashedProcessor extends Processor {
 
   process(file: drive_v3.Schema$File): number {
     if (file.trashed) {
-      return -0.5
+      return -10
     }
     return 0
   }
