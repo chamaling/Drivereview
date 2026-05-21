@@ -80,9 +80,8 @@ export default async function Page({
   return (
     <div className="flex h-screen flex-col items-center justify-center">
       <div className="flex w-full flex-col items-center justify-around">
-        <SpaceAnalytics data={data} />
-
         <DriveTable data={data.all} />
+        <SpaceAnalytics data={data} />
       </div>
 
       <ScanButton rescan initOpen={false} />
