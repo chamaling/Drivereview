@@ -89,7 +89,14 @@ export default function ScanButton({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
-        render={<Button>{rescan ? "Rescan drive" : "Scan drive"}</Button>}
+        render={
+          <Button
+            variant={rescan ? "outline" : "default"}
+            className="px-3 py-2"
+          >
+            {rescan ? "Rescan drive" : "Scan drive"}
+          </Button>
+        }
       />
       <DialogContent className="sm:max-w-sm">
         <DialogHeader>
