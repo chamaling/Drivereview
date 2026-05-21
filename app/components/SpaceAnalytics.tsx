@@ -65,15 +65,15 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
   const chartConfig = {
     potential_clutter: {
       label: "Potential Clutter",
-      color: "var(--chart-1)",
+      color: "#ec3036",
     },
     low_priority: {
       label: "Low Priority",
-      color: "var(--chart-2)",
+      color: "#ff6a00",
     },
     needs_review: {
       label: "Needs Review",
-      color: "var(--chart-3)",
+      color: "#ffc700",
     },
     first_dist: {
       label: firstGreatest ? firstGreatest[0] : "N/A",
@@ -91,6 +91,11 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
 
   const chartData = [
     {
+      name: "potential_clutter",
+      value: parseFloat(clutterSizePercent),
+      fill: chartConfig.potential_clutter.color,
+    },
+    {
       name: "low_priority",
       value: parseFloat(lowSizePercent),
       fill: chartConfig.low_priority.color,
@@ -99,11 +104,6 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
       name: "needs_review",
       value: parseFloat(reviewSizePercent),
       fill: chartConfig.needs_review.color,
-    },
-    {
-      name: "potential_clutter",
-      value: parseFloat(clutterSizePercent),
-      fill: chartConfig.potential_clutter.color,
     },
   ]
 
