@@ -131,72 +131,77 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
   ]
 
   return (
-    <div className="flex h-full flex-col items-center justify-center">
-      <h3>Distribution by Ranking</h3>
-      <ChartContainer config={chartConfig} className="relative h-64 w-full">
-        <PieChart responsive accessibilityLayer>
-          <Pie
-            data={chartData}
-            dataKey="value"
-            nameKey="name"
-            strokeWidth={0}
-            cornerRadius={4}
-            paddingAngle={3}
-            innerRadius="60%"
-            animationBegin={0}
-            animationDuration={800}
-          />
-          <ChartLegend
-            content={
-              // sort by order if payload name is in ORDER array, otherwise put at the end
-              (props) => {
-                const sortedPayload = [...(props.payload ?? [])].sort(
-                  (a, b) =>
-                    payloadOrder.indexOf(a.value ?? "") -
-                    payloadOrder.indexOf(b.value ?? "")
-                )
+    <div className="flex w-full items-center justify-center">
+      <div className="flex h-full flex-col items-center justify-center">
+        <h3 className="text-sm">Distribution by Ranking</h3>
+        <ChartContainer config={chartConfig} className="relative h-55 w-full">
+          <PieChart responsive accessibilityLayer>
+            <Pie
+              data={chartData}
+              dataKey="value"
+              nameKey="name"
+              strokeWidth={0}
+              cornerRadius={4}
+              paddingAngle={3}
+              innerRadius="60%"
+              animationBegin={0}
+              animationDuration={800}
+            />
+            <ChartLegend
+              content={
+                // sort by order if payload name is in ORDER array, otherwise put at the end
+                (props) => {
+                  const sortedPayload = [...(props.payload ?? [])].sort(
+                    (a, b) =>
+                      payloadOrder.indexOf(a.value ?? "") -
+                      payloadOrder.indexOf(b.value ?? "")
+                  )
 
-                return (
-                  <ChartLegendContent
-                    className="flex-col"
-                    payload={sortedPayload}
-                  />
-                )
+                  return (
+                    <ChartLegendContent
+                      className="flex-col"
+                      payload={sortedPayload}
+                    />
+                  )
+                }
               }
-            }
-          />
-        </PieChart>
-        <div className="absolute inset-0 bottom-1/3 flex items-center justify-center">
-          <span className="text-base font-bold">
-            {formatFileSize(totalSize)}
-          </span>
-        </div>
-      </ChartContainer>
-      <h3 className="mt-8">Distribution by File Type</h3>
-      <ChartContainer config={chartConfig} className="relative h-64 w-full">
-        <PieChart responsive accessibilityLayer>
-          <Pie
-            data={chartDistData}
-            dataKey="value"
-            nameKey="name"
-            strokeWidth={0}
-            cornerRadius={4}
-            paddingAngle={3}
-            innerRadius="60%"
-            animationBegin={0}
-            animationDuration={800}
-          />
-          <ChartLegend className="flex-col" content={<ChartLegendContent />} />
-        </PieChart>
+            />
+          </PieChart>
+          <div className="absolute inset-0 bottom-2/5 flex items-center justify-center">
+            <span className="text-base font-bold">
+              {formatFileSize(totalSize)}
+            </span>
+          </div>
+        </ChartContainer>
+      </div>
+      <div className="flex h-full flex-col items-center justify-center">
+        <h3 className="text-sm">Distribution by File Type</h3>
+        <ChartContainer config={chartConfig} className="relative h-55 w-full">
+          <PieChart responsive accessibilityLayer>
+            <Pie
+              data={chartDistData}
+              dataKey="value"
+              nameKey="name"
+              strokeWidth={0}
+              cornerRadius={4}
+              paddingAngle={3}
+              innerRadius="60%"
+              animationBegin={0}
+              animationDuration={800}
+            />
+            <ChartLegend
+              className="flex-col"
+              content={<ChartLegendContent />}
+            />
+          </PieChart>
 
-        <div className="absolute inset-0 bottom-1/3 flex flex-col items-center justify-center">
-          <span className="text-base font-bold">
-            {formatFileSize(topThreeTotal)}
-          </span>
-
-          <small className="text-muted-foreground">(Top 3 file types)</small>
-        </div>
-      </ChartContainer>
+          <div className="absolute inset-0 bottom-2/5 flex flex-col items-center justify-center">
+            <span className="text-base font-bold">
+              {formatFileSize(topThreeTotal)}
+            </span>
+          </div>
+        </ChartContainer>
+      </div>
     </div>
   )
 }
