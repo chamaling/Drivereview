@@ -2,13 +2,40 @@ import { ColumnDef } from "@tanstack/react-table"
 import { driveFile } from "@/app/actions/scanDriveAction"
 import { formatFileSize } from "@/app/lib/fileHelper"
 import { Checkbox } from "@/components/ui/checkbox"
+import Image from "next/image"
+import { convertMimeTypeToFileType } from "@/app/lib/fileHelper"
 
 function convertRatingToTextHundredths(rating: number) {
   const percentage = (rating * 100).toFixed(0)
   return `${percentage}/100`
 }
 
+const fileTypeToIconMap: Record<string, string> = {
+  Docs: "/google-docs.svg",
+  Sheets: "/google-sheets.svg",
+  Slides: "/google-slides.svg",
+  Image: "/image.svg",
+  PDF: "/pdf.svg",
+  Video: "/video.svg",
+}
+
 export const columns: ColumnDef<driveFile>[] = [
+  {
+    id: "icon",
+    cell: ({ row }) => {
+      const file = row.original
+      const fileType = convertMimeTypeToFileType(file.mimeType || "")
+      const src = fileTypeToIconMap[fileType] || "/image.svg"
+      console.log("Rendering icon for file:", file.name, "with type:", fileType)
+      return (
+        <div className="relative size-5">
+          <Image src={src} alt={"Google Drive Icon for " + fileType} fill />
+        </div>
+      )
+    },
+    enableHiding: false,
+    enableSorting: false,
+  },
   {
     accessorKey: "name",
   },
