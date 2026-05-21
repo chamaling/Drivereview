@@ -45,3 +45,22 @@ export function convertMimeTypeToFileType(
   }
   return "Other"
 }
+
+export function convertFileTypeToHexColor(fileType: string): string {
+  switch (fileType) {
+    case "Docs":
+      return "#4285F4"
+    case "Sheets":
+      return "#34A853"
+    case "Slides":
+      return "#FBBC05"
+    case "Image":
+      return "#EA4335"
+    case "PDF":
+      return "#FF6D01"
+    case "Video":
+      return "#8E24AA"
+    default:
+      return "#9E9E9E"
+  }
+}

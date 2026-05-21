@@ -1,19 +1,17 @@
 "use client"
-import {
-  scanDriveAction,
-  type drivePriorityMap,
-} from "../actions/scanDriveAction"
+import { type drivePriorityMap } from "../actions/scanDriveAction"
 import { ChartContainer } from "@/components/ui/chart"
 import { PieChart, Pie } from "recharts"
 import {
   type ChartConfig,
   ChartLegend,
   ChartLegendContent,
-  ChartTooltip,
-  ChartTooltipContent,
 } from "@/components/ui/chart"
 import { formatFileSize, convertMimeTypeToFileType } from "@/app/lib/fileHelper"
+import { convertFileTypeToHexColor } from "../lib/fileHelper"
+
 const payloadOrder = ["potential_clutter", "low_priority", "needs_review"]
+
 export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
   const lowLength = data.lowPriority.length
   const reviewLength = data.needsReview.length
@@ -78,15 +76,21 @@ export default function SpaceAnalytics({ data }: { data: drivePriorityMap }) {
     },
     first_dist: {
       label: firstGreatest ? firstGreatest[0] : "N/A",
-      color: "var(--chart-3)",
+      color: firstGreatest
+        ? convertFileTypeToHexColor(firstGreatest[0])
+        : "oklch(0.442 0.017 285.786)",
     },
     second_dist: {
       label: secondGreatest ? secondGreatest[0] : "N/A",
-      color: "var(--chart-4)",
+      color: secondGreatest
+        ? convertFileTypeToHexColor(secondGreatest[0])
+        : "oklch(0.442 0.017 285.786)",
     },
     third_dist: {
       label: thirdGreatest ? thirdGreatest[0] : "N/A",
-      color: "var(--chart-5)",
+      color: thirdGreatest
+        ? convertFileTypeToHexColor(thirdGreatest[0])
+        : "oklch(0.442 0.017 285.786)",
     },
   } satisfies ChartConfig
 
