@@ -77,6 +77,7 @@ export default function ScanButton({
       })
       const url = `/dashboard?${searchParams.toString()}`
       router.replace(url)
+      setOpen(false)
     } catch (error) {
       if (error instanceof ZodError) {
         const firstError = error.issues[0]
