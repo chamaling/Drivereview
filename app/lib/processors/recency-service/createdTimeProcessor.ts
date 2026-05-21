@@ -16,7 +16,9 @@ class CreatedTimeProcessor extends Processor {
     const currentTime = Date.now()
     const ageInDays = (currentTime - createdTime) / (1000 * 60 * 60 * 24)
 
-    return Math.min(1 / ageInDays ** 2, 1)
+    const additiveScore = Math.min(1 / ageInDays ** 2, 1)
+    const subtractiveScore = Math.min(-Math.log10(ageInDays) + 2, 0)
+    return additiveScore + subtractiveScore
   }
 }
 
