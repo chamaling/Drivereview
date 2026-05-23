@@ -26,7 +26,7 @@ const fileTypeToIconMap: Record<string, string> = {
   Sheets: "/google-sheets.svg",
   Slides: "/google-slides.svg",
   Image: "/image.svg",
-  PDF: "/pdf.svg",
+  PDF: "/google-pdf.svg",
   Video: "/video.svg",
 }
 
