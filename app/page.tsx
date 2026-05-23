@@ -19,21 +19,21 @@ export default function Page() {
           <li className="mr-2">
             Connect to Drive <HeroArrowConnectorIcon />
             <HeroImage
-              src="/placeholder.svg"
-              alt="Picture of google drive with untitled document and important document"
+              src="/drivesquare1final.jpg"
+              alt="Picture of sign in page for google drive to connect to drivereview app"
             />
           </li>
           <li>
             We scan storage usage <HeroArrowConnectorIcon />
             <HeroImage
-              src="/placeholder.svg"
-              alt="Picture of web app scanning google drive storage"
+              src="/drivesquare2final.png"
+              alt="Picture of modal with filter sfor scanning google drive storage"
             />
           </li>
           <li>
             Get cleanup recommendations
             <HeroImage
-              src="/placeholder.svg"
+              src="/drivesquare3final.jpg"
               alt="Picture of web app showing recommendations for optimizing google drive storage"
             />
           </li>
