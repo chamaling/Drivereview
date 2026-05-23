@@ -54,7 +54,7 @@ function ThemeHotkey() {
       if (isTypingTarget(event.target)) {
         return
       }
-
+      return
       setTheme(resolvedTheme === "dark" ? "light" : "dark")
     }
 
