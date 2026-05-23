@@ -33,7 +33,7 @@ function convertFileTypesArrayToQueryString(
         const mimeType = convertFileTypeToMimeType(
           key as keyof typeof fileTypes
         )
-        return `mimeType=${mimeType}`
+        return `mimeType contains ${mimeType}`
       }
       return null
     })

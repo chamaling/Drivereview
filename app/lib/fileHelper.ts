@@ -18,11 +18,11 @@ export function convertFileTypeToMimeType(
     case "Slides":
       return "'application/vnd.google-apps.presentation'"
     case "Image":
-      return "'image/*'"
+      return "'image/'"
     case "PDF":
       return "'application/pdf'"
     case "Video":
-      return "'video/*'"
+      return "'video/'"
   }
 }
 
