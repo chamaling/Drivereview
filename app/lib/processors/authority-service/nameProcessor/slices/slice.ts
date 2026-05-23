@@ -1,4 +1,5 @@
 import "server-only"
+
 export default class Slice {
   private regObject: RegExp
   private defaultWeight: number = 0
@@ -32,8 +33,12 @@ export default class Slice {
     }
   }
 
+  private normalize(str: string): string {
+    return str.replace(/[\s_\-']/g, "").toLowerCase()
+  }
+
   process(name: string): number {
-    const match = name.toLowerCase().match(this.regObject)
+    const match = this.normalize(name).match(this.regObject)
 
     if (!match) {
       return 0

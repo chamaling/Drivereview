@@ -1,14 +1,12 @@
 import "server-only"
 import Slice from "./slice"
-
 const identityKeywords: string[] = [
   // All of these keywords are related to identity documents
   // which are most cases crucial to keep so these will have higher weights
-
   // Vital Records
-  "birth certificate",
-  "birth record",
-  "certificate of live birth",
+  "birthcertificate",
+  "birthrecord",
+  "certificateoflivebirth",
   "adoption",
   "marriage",
   "divorce",
@@ -16,51 +14,46 @@ const identityKeywords: string[] = [
   "death",
   "naturalization",
   "citizenship",
-
   // IDs & Government Documents
   "passport",
-  "driver's license",
-  "state ID",
-  "social security",
+  "driverslicense",
+  "stateID",
+  "socialsecurity",
   "SSN",
   "\\bEIN\\b",
   "ITIN",
-  "green card",
-  "permanent resident",
+  "greencard",
+  "permanentresident",
   "\\bvisa\\b",
-  "work permit",
-  "national ID",
-  "government ID",
-  "photo ID",
-
+  "workpermit",
+  "nationalID",
+  "governmentID",
+  "photoID",
   // Legal Documents
-  "power of attorney",
+  "powerofattorney",
   "POA",
   "guardianship",
-  "custody agreement",
-  "restraining order",
-  "court order",
-  "name change",
-  "deed poll",
+  "custodyagreement",
+  "restrainingorder",
+  "courtorder",
+  "namechange",
+  "deedpoll",
   "notarized",
   "affidavit",
-
   // Credentials & Licenses
   "diploma",
   "degree",
   "transcript",
   "GED",
   "certification",
-  "professional license",
-  "bar exam",
-  "nursing license",
-  "medical license",
-  "teaching certificate",
-  "trade license",
+  "professionallicense",
+  "barexam",
+  "nursinglicense",
+  "medicallicense",
+  "teachingcertificate",
+  "tradelicense",
   "accreditation",
   "credential",
 ]
-
 const identitySlice = new Slice(identityKeywords, Infinity)
-
 export default identitySlice
