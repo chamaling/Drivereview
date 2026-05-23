@@ -25,9 +25,9 @@ const fileTypeToIconMap: Record<string, string> = {
   Docs: "/google-docs.svg",
   Sheets: "/google-sheets.svg",
   Slides: "/google-slides.svg",
-  Image: "/image.svg",
+  Image: "/google-image.svg",
   PDF: "/google-pdf.svg",
-  Video: "/video.svg",
+  Video: "/google-video.svg",
 }
 
 export const columns: ColumnDef<driveFile>[] = [

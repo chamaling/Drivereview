@@ -29,6 +29,7 @@ export function convertFileTypeToMimeType(
 export function convertMimeTypeToFileType(
   mimeType: ReturnType<typeof convertFileTypeToMimeType>
 ): string {
+  console.log("Converting mime type to file type for mime type:", mimeType)
   switch (mimeType) {
     case "application/pdf":
       return "PDF"
