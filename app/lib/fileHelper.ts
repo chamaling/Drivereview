@@ -29,7 +29,6 @@ export function convertFileTypeToMimeType(
 export function convertMimeTypeToFileType(
   mimeType: ReturnType<typeof convertFileTypeToMimeType>
 ): string {
-  console.log("Converting mime type to file type for mime type:", mimeType)
   switch (mimeType) {
     case "application/pdf":
       return "PDF"
@@ -40,10 +39,6 @@ export function convertMimeTypeToFileType(
     case "application/vnd.google-apps.presentation":
       return "Slides"
   }
-  console.log(
-    "Mime type not matched to specific file type, checking for general types..."
-  )
-  console.log("Current mime type:", mimeType)
   if (mimeType.startsWith("image/")) {
     return "Image"
   }

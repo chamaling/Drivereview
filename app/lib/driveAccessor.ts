@@ -20,6 +20,8 @@ export async function getDriveFiles(
     fields:
       "files(id,name,mimeType,trashed,size,capabilities,contentRestrictions,createdTime,modifiedTime,starred)",
     orderBy: "quotaBytesUsed desc",
+    supportsAllDrives: true,
+    includeItemsFromAllDrives: true,
   })
   let files = fileList.data.files || []
 

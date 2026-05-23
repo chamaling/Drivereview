@@ -61,5 +61,6 @@ export function buildDriveQuery(globalFilters: GlobalFilters) {
     queries.push(fileTypesString)
   }
 
+  console.log("Final query parts:", queries)
   return queries.join(" and ")
 }

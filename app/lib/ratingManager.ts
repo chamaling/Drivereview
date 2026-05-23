@@ -24,14 +24,8 @@ class RatingManager {
       if (file.starred) {
         totalRating += 0.5
       }
-
-      console.log(
-        `Rating from ${serviceName} for file ${file.name}: ${rating} with weight ${service.getWeight()}`
-      )
     }
-    console.log(
-      `Total rating for file ${file.name}: ${totalRating} with total weight ${totalWeight}`
-    )
+
     return totalWeight > 0 ? Math.min(totalRating / totalWeight, 1) : 0
   }
 }

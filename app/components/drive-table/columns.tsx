@@ -37,7 +37,7 @@ export const columns: ColumnDef<driveFile>[] = [
       const file = row.original
       const fileType = convertMimeTypeToFileType(file.mimeType || "")
       const src = fileTypeToIconMap[fileType] || "/image.svg"
-      console.log("Rendering icon for file:", file.name, "with type:", fileType)
+
       return (
         <div className="relative size-5">
           <Image src={src} alt={"Google Drive Icon for " + fileType} fill />
