@@ -20,15 +20,14 @@ class MimeTypeProcessor extends Processor {
       case "application/vnd.google-apps.presentation":
         // documents are likely to be edited or necessary, so they get a higher score
         return 0
-      case "image/jpeg":
-      case "image/png":
-      case "video/mp4":
-        // images and videos are less likely so they get a lower score
-        return -0.5
-      default:
-        // other file types are even less likely to be needed, so they get a lower score
-        return -0.75
     }
+
+    if (mimeType.startsWith("image/") || mimeType.startsWith("video/")) {
+      // other image and video types are less likely so they get a lower score
+      return -0.5
+    }
+    // other file types are even less likely to be needed, so they get a lower score
+    return -0.75
   }
 }
 

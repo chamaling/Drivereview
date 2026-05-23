@@ -38,10 +38,16 @@ export function convertMimeTypeToFileType(
       return "Sheets"
     case "application/vnd.google-apps.presentation":
       return "Slides"
-    case "image/*":
-      return "Image"
-    case "video/*":
-      return "Video"
+  }
+  console.log(
+    "Mime type not matched to specific file type, checking for general types..."
+  )
+  console.log("Current mime type:", mimeType)
+  if (mimeType.startsWith("image/")) {
+    return "Image"
+  }
+  if (mimeType.startsWith("video/")) {
+    return "Video"
   }
   return "Other"
 }

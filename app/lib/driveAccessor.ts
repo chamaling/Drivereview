@@ -13,7 +13,7 @@ export async function getDriveFiles(
 ) {
   const drive = googleApi.drive({ version: "v3", auth: oauthClient })
   const globalFilters = getGlobalFilters(clientFilters)
-
+  console.log("Built query:", buildDriveQuery(globalFilters))
   const fileList = await drive.files.list({
     pageSize: 200,
     q: buildDriveQuery(globalFilters),
