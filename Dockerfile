@@ -4,6 +4,7 @@
 ARG NODE_VERSION=25.5.0
 FROM node:${NODE_VERSION}-slim AS base
 
+
 LABEL fly_launch_runtime="Next.js"
 
 # Next.js app lives here
@@ -19,6 +20,11 @@ RUN npm install -g pnpm@$PNPM_VERSION
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
+
+ARG NEXT_PUBLIC_GOOGLE_CLIENT_ID
+ENV NEXT_PUBLIC_GOOGLE_CLIENT_ID=$NEXT_PUBLIC_GOOGLE_CLIENT_ID
+ARG NEXT_PUBLIC_GOOGLE_REDIRECT_URI
+ENV NEXT_PUBLIC_GOOGLE_REDIRECT_URI=$NEXT_PUBLIC_GOOGLE_REDIRECT_URI
 
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
