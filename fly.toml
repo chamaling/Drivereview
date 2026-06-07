@@ -7,6 +7,9 @@ app = 'drivereview'
 primary_region = 'iad'
 
 [build]
+  [build.args]
+    NEXT_PUBLIC_GOOGLE_CLIENT_ID = ""
+    NEXT_PUBLIC_GOOGLE_REDIRECT_URI = ""
 
 [http_service]
   internal_port = 3000
